@@ -1,0 +1,137 @@
+<!-- HERO -->
+<section class="relative pt-32 pb-20 px-4 md:px-8 overflow-hidden"
+         style="background: linear-gradient(180deg, #08050a 0%, #0a0a0a 100%);">
+  <div class="absolute inset-0 opacity-15"
+       style="background: radial-gradient(ellipse at 50% 0%, #531e10 0%, transparent 60%);"></div>
+  <div class="relative z-10 max-w-7xl mx-auto text-center">
+    <div class="flex items-center justify-center gap-3 mb-4">
+      <span class="h-px w-12" style="background: #d3af67;"></span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Гастрономія</span>
+      <span class="h-px w-12" style="background: #d3af67;"></span>
+    </div>
+    <h1 class="text-5xl md:text-7xl font-light text-white mb-4"
+        style="font-family: 'Cormorant Garamond', serif;">
+      Ресторан <span class="gradient-text">«За Тином»</span>
+    </h1>
+    <p class="text-white/50 max-w-xl mx-auto">
+      Авторська кухня, вишукані страви та незрівнянна атмосфера
+    </p>
+  </div>
+</section>
+
+<!-- RESTAURANT INFO -->
+<section class="py-20 px-4 md:px-8" style="background: #0a0a0a;">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="opacity-0-init">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="h-px w-12" style="background: #d3af67;"></span>
+        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Про ресторан</span>
+      </div>
+      <h2 class="text-4xl font-light text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">
+        Смак, що <span class="gradient-text">запам'ятовується</span>
+      </h2>
+      <p class="text-white/60 leading-relaxed mb-5">
+        Ресторан «За Тином» — це місце, де поєднуються традиції справжньої української
+        кухні та європейська гастрономія. Щоденні сніданки-шведський стіл, обіди та вечері
+        з меню à la carte.
+      </p>
+      <p class="text-white/60 leading-relaxed mb-8">
+        Великий зал до 100 гостей, затишна мала зала та літня тераса. Організація банкетів,
+        корпоративних заходів та урочистостей будь-якого масштабу.
+      </p>
+      <div class="grid grid-cols-2 gap-4 mb-8">
+        @for (info of [
+          {icon: '🕐', label: 'Сніданок', time: '7:00 — 10:30'},
+          {icon: '🍽️', label: 'Обід/Вечеря', time: '12:00 — 23:00'},
+          {icon: '🥂', label: 'Банкети', time: 'За замовленням'},
+          {icon: '☕', label: 'Бар', time: '10:00 — 24:00'}
+        ]; track info.label) {
+          <div class="glass-card p-4">
+            <div class="text-xl mb-1">{{ info.icon }}</div>
+            <div class="text-xs text-white/40 mb-0.5">{{ info.label }}</div>
+            <div class="text-sm text-white font-medium">{{ info.time }}</div>
+          </div>
+        }
+      </div>
+      <div class="flex flex-wrap gap-3 items-center">
+        <a routerLink="/contacts" class="btn-gold">Забронювати столик</a>
+        <a href="tel:+380673805404" class="btn-outline-gold">
+          +38(067)380-54-04
+        </a>
+      </div>
+    </div>
+
+    <!-- Image -->
+    <div class="rounded-3xl overflow-hidden opacity-0-init" style="height: 500px;">
+      <img src="https://kleopatra-hotel.com/images/Slide/restorans/1.jpg"
+           alt="Ресторан «За Тином»"
+           class="w-full h-full object-cover">
+    </div>
+  </div>
+</section>
+
+<!-- HALLS SECTION -->
+<section class="py-20 px-4 md:px-8" style="background: #080808;">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12 opacity-0-init">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="h-px w-12" style="background: #d3af67;"></span>
+        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Зали та майданчики</span>
+        <span class="h-px w-12" style="background: #d3af67;"></span>
+      </div>
+      <h2 class="text-4xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
+        Наші <span class="gradient-text">зали</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (hall of halls; track hall.name) {
+        <div class="group rounded-2xl overflow-hidden border border-white/5 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 opacity-0-init"
+             style="background: #111;">
+          <div class="h-44 overflow-hidden">
+            <img [src]="hall.img" [alt]="hall.name"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          </div>
+          <div class="p-5">
+            <div class="text-xs tracking-widest uppercase mb-1" style="color: #d3af67;">{{ hall.type }}</div>
+            <h3 class="text-lg font-medium text-white mb-2" style="font-family: 'Cormorant Garamond', serif;">{{ hall.name }}</h3>
+            <p class="text-white/50 text-sm leading-relaxed">{{ hall.desc }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- MENU PREVIEW -->
+<section class="py-20 px-4 md:px-8" style="background: #080808;">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12 opacity-0-init">
+      <h2 class="text-4xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
+        Меню <span class="gradient-text">ресторану</span>
+      </h2>
+    </div>
+    @for (section of menuItems; track section.category) {
+      <div class="mb-10 opacity-0-init">
+        <h3 class="text-xl font-medium mb-5 pb-3 border-b border-white/10"
+            style="color: #d3af67; font-family: 'Cormorant Garamond', serif;">
+          {{ section.category }}
+        </h3>
+        <div class="space-y-3">
+          @for (item of section.items; track item.name) {
+            <div class="glass-card p-5 flex items-center justify-between gap-4 hover:border-gold/20 transition-all duration-300">
+              <div>
+                <div class="text-white font-medium mb-1">{{ item.name }}</div>
+                <div class="text-white/40 text-sm">{{ item.desc }}</div>
+              </div>
+              <div class="shrink-0 font-semibold" style="color: #d3af67;">{{ item.price }}</div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+    <div class="text-center mt-8 opacity-0-init">
+      <p class="text-white/40 text-sm mb-4">Повне меню доступне у ресторані або за запитом</p>
+      <a routerLink="/contacts" class="btn-gold">Забронювати столик</a>
+    </div>
+  </div>
+</section>

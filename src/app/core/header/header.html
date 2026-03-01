@@ -1,0 +1,100 @@
+<header
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+  [ngClass]="{
+    'bg-black/80 backdrop-blur-md border-b border-white/5 shadow-lg shadow-black/20': isScrolled(),
+    'bg-transparent': !isScrolled()
+  }">
+
+  <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+
+      <!-- Logo -->
+      <a routerLink="/" class="flex items-center gap-3 group" (click)="closeMenu()">
+        <div class="relative">
+          <div class="w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+               style="border-color: #d3af67;">
+            <span class="text-lg font-bold" style="color: #d3af67; font-family: 'Cormorant Garamond', serif;">К</span>
+          </div>
+          <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               style="box-shadow: 0 0 20px rgba(211,175,103,0.6);"></div>
+        </div>
+        <div class="hidden sm:block">
+          <span class="block text-white font-semibold text-sm tracking-wider" style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;">
+            Клеопатра
+          </span>
+          <span class="block text-xs tracking-widest" style="color: #d3af67; font-size: 0.6rem;">
+            ГОТЕЛЬ ★ КАМ'ЯНЕЦЬ-ПОДІЛЬСЬКИЙ
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1">
+        @for (item of navItems; track item.path) {
+          <a
+            [routerLink]="item.path"
+            routerLinkActive="active-nav"
+            class="relative px-4 py-2 text-sm font-medium text-white/80 hover:text-white tracking-wide transition-all duration-300 group"
+            style="font-family: 'Inter', sans-serif; letter-spacing: 0.05em;">
+            {{ item.label }}
+            <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px transition-all duration-300 group-hover:w-4/5"
+                  style="background: #d3af67;"></span>
+          </a>
+        }
+      </nav>
+
+      <!-- Phone + CTA -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="tel:+380384991652" class="text-sm font-medium transition-colors duration-300 hover:opacity-80"
+           style="color: #d3af67; font-family: 'Inter', sans-serif;">
+          +38(03849)9-16-52
+        </a>
+        <a routerLink="/numbers" class="btn-gold text-xs px-5 py-2.5">
+          Забронювати
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button
+        class="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 transition-all duration-300"
+        (click)="toggleMenu()"
+        aria-label="Меню">
+        <span class="block w-6 h-px bg-white transition-all duration-300"
+              [ngClass]="{'rotate-45 translate-y-2': mobileMenuOpen()}"></span>
+        <span class="block w-6 h-px bg-white transition-all duration-300"
+              [ngClass]="{'opacity-0 scale-x-0': mobileMenuOpen()}"></span>
+        <span class="block w-6 h-px bg-white transition-all duration-300"
+              [ngClass]="{'-rotate-45 -translate-y-2': mobileMenuOpen()}"></span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    class="lg:hidden overflow-hidden transition-all duration-500"
+    [ngClass]="{'max-h-screen opacity-100': mobileMenuOpen(), 'max-h-0 opacity-0': !mobileMenuOpen()}"
+    style="background: rgba(10,10,10,0.97); backdrop-filter: blur(20px);">
+    <nav class="flex flex-col px-4 py-6 gap-2 border-t border-white/5">
+      @for (item of navItems; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="active-nav-mobile"
+          class="flex items-center py-3 px-4 rounded-lg text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 tracking-wide"
+          style="font-family: 'Inter', sans-serif;"
+          (click)="closeMenu()">
+          {{ item.label }}
+        </a>
+      }
+      <div class="mt-4 pt-4 border-t border-white/10 flex flex-col gap-3">
+        <a href="tel:+380384991652" class="text-center py-3 font-medium" style="color: #d3af67;">
+          +38(03849)9-16-52
+        </a>
+        <a routerLink="/numbers" class="btn-gold text-center justify-center" (click)="closeMenu()">
+          Забронювати номер
+        </a>
+      </div>
+    </nav>
+  </div>
+
+</header>

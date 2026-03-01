@@ -1,0 +1,69 @@
+<!-- HERO -->
+<section class="relative pt-32 pb-20 px-4 md:px-8 overflow-hidden"
+         style="background: linear-gradient(180deg, #050508 0%, #0a0a0a 100%);">
+  <div class="absolute inset-0 opacity-15"
+       style="background: radial-gradient(ellipse at 50% 0%, #1e1a53 0%, transparent 60%);"></div>
+  <div class="relative z-10 max-w-7xl mx-auto text-center">
+    <div class="flex items-center justify-center gap-3 mb-4">
+      <span class="h-px w-12" style="background: #d3af67;"></span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Корпоративні послуги</span>
+      <span class="h-px w-12" style="background: #d3af67;"></span>
+    </div>
+    <h1 class="text-5xl md:text-7xl font-light text-white mb-4"
+        style="font-family: 'Cormorant Garamond', serif;">
+      <span class="gradient-text">Бізнес</span>-сервіс
+    </h1>
+    <p class="text-white/50 max-w-xl mx-auto">
+      Все для успішних переговорів та корпоративних заходів
+    </p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="py-20 px-4 md:px-8" style="background: #0a0a0a;">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      @for (service of services; track service.title) {
+        <div class="glass-card p-8 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 group opacity-0-init cursor-default">
+          <div class="text-4xl mb-5">{{ service.icon }}</div>
+          <h3 class="text-2xl font-light text-white mb-3" style="font-family: 'Cormorant Garamond', serif;">
+            {{ service.title }}
+          </h3>
+          <p class="text-white/50 leading-relaxed text-sm">{{ service.desc }}</p>
+        </div>
+      }
+    </div>
+
+    <!-- Conference Hall Detail -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center opacity-0-init">
+      <div>
+        <div class="flex items-center gap-3 mb-6">
+          <span class="h-px w-12" style="background: #d3af67;"></span>
+          <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Конференц-зал</span>
+        </div>
+        <h2 class="text-4xl font-light text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">
+          Ідеальний простір для <span class="gradient-text">ваших заходів</span>
+        </h2>
+        <p class="text-white/60 leading-relaxed mb-6">
+          Готель «Клеопатра» — ідеальне місце для конференцій, круглих столів,
+          презентацій, ділових зустрічей, семінарів та майстер-класів. Сучасне
+          обладнання та підтримка офіс-менеджера гарантують успіх вашого заходу.
+        </p>
+        <div class="grid grid-cols-2 gap-3 mb-8">
+          @for (spec of conferenceSpecs; track spec.label) {
+            <div class="glass-card p-4">
+              <div class="text-xs text-white/40 mb-1">{{ spec.label }}</div>
+              <div class="text-white font-medium">{{ spec.value }}</div>
+            </div>
+          }
+        </div>
+        <a routerLink="/contacts" class="btn-gold">Замовити зал</a>
+      </div>
+      <div class="rounded-3xl overflow-hidden" style="height: 400px;">
+        <img src="https://kleopatra-hotel.com/images/Slide/Busines/Biznes_Konfer_2.jpg"
+             alt="Конференц-зал готелю Клеопатра"
+             class="w-full h-full object-cover">
+      </div>
+    </div>
+  </div>
+</section>

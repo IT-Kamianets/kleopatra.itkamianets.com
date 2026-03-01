@@ -1,0 +1,102 @@
+<!-- HERO -->
+<section class="relative pt-32 pb-20 px-4 md:px-8 overflow-hidden"
+         style="background: linear-gradient(180deg, #050808 0%, #0a0a0a 100%);">
+  <div class="absolute inset-0 opacity-15"
+       style="background: radial-gradient(ellipse at 50% 0%, #0a2010 0%, transparent 60%);"></div>
+  <div class="relative z-10 max-w-7xl mx-auto text-center">
+    <div class="flex items-center justify-center gap-3 mb-4">
+      <span class="h-px w-12" style="background: #d3af67;"></span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Кам'янець-Подільський</span>
+      <span class="h-px w-12" style="background: #d3af67;"></span>
+    </div>
+    <h1 class="text-5xl md:text-7xl font-light text-white mb-4"
+        style="font-family: 'Cormorant Garamond', serif;">
+      <span class="gradient-text">Туризм</span> та екскурсії
+    </h1>
+    <p class="text-white/50 max-w-xl mx-auto">
+      Відкрийте для себе одне з найкрасивіших міст України разом із готелем Клеопатра
+    </p>
+  </div>
+</section>
+
+<!-- ATTRACTIONS -->
+<section class="py-20 px-4 md:px-8" style="background: #0a0a0a;">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12 opacity-0-init">
+      <h2 class="text-4xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
+        Головні <span class="gradient-text">пам'ятки</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      @for (place of attractions; track place.name) {
+        <div class="glass-card p-6 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 group opacity-0-init cursor-default">
+          <div class="flex items-start justify-between mb-4">
+            <span class="text-3xl">{{ place.icon }}</span>
+            <span class="text-xs px-2 py-1 rounded-full border text-white/40"
+                  style="border-color: rgba(211,175,103,0.3); color: #d3af67;">
+              {{ place.distance }}
+            </span>
+          </div>
+          <h3 class="text-lg font-medium text-white mb-2 group-hover:text-gold transition-colors duration-300"
+              style="font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;">
+            {{ place.name }}
+          </h3>
+          <p class="text-white/50 text-sm leading-relaxed">{{ place.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- MAP of 7 Wonders -->
+<section class="py-12 px-4 md:px-8" style="background: #080808;">
+  <div class="max-w-7xl mx-auto opacity-0-init">
+    <div class="rounded-3xl overflow-hidden border border-white/10" style="height: 340px;">
+      <img src="https://kleopatra-hotel.com/images/stories/mapa_low.jpg"
+           alt="Карта 7 чудес Кам'янця-Подільського"
+           class="w-full h-full object-cover">
+    </div>
+    <p class="text-white/30 text-xs text-center mt-3">Карта визначних пам'яток Кам'янця-Подільського</p>
+  </div>
+</section>
+
+<!-- TOURS -->
+<section class="py-20 px-4 md:px-8" style="background: #080808;">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12 opacity-0-init">
+      <h2 class="text-4xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
+        Екскурсійні <span class="gradient-text">програми</span>
+      </h2>
+      <p class="text-white/50 mt-3">Організуємо екскурсії для гостей готелю</p>
+    </div>
+
+    <div class="space-y-4">
+      @for (tour of tours; track tour.name) {
+        <div class="glass-card p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-gold/20 transition-all duration-300 opacity-0-init">
+          <div>
+            <h3 class="text-xl font-light text-white mb-1" style="font-family: 'Cormorant Garamond', serif;">{{ tour.name }}</h3>
+            <div class="flex gap-4 text-sm text-white/40">
+              <span>⏱ {{ tour.duration }}</span>
+              <span>👥 {{ tour.group }}</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 shrink-0">
+            <span class="text-xl font-light" style="color: #d3af67; font-family: 'Cormorant Garamond', serif;">
+              {{ tour.price }}
+            </span>
+            <a routerLink="/contacts"
+               class="px-5 py-2 rounded-full text-sm font-medium border border-gold/30 hover:bg-gold/10 transition-all duration-300"
+               style="color: #d3af67;">
+              Замовити
+            </a>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="text-center mt-10 opacity-0-init">
+      <p class="text-white/40 text-sm mb-4">Індивідуальний маршрут — за вашими побажаннями</p>
+      <a routerLink="/contacts" class="btn-gold">Зв'язатися з нами</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,408 @@
+<!-- HERO SLIDER -->
+<section class="relative h-screen overflow-hidden">
+
+  <!-- Slides -->
+  @for (slide of slides; track $index) {
+    <div
+      class="absolute inset-0 transition-opacity duration-1000"
+      [ngClass]="{'opacity-100': currentSlide() === $index, 'opacity-0': currentSlide() !== $index}">
+      <div class="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-[8000ms]"
+           [ngClass]="{'scale-100': currentSlide() === $index}"
+           [style.background-image]="'url(' + slide.image + ')'">
+      </div>
+    </div>
+  }
+
+  <!-- Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 h-full flex flex-col justify-end pb-24 px-4 md:px-8 max-w-7xl mx-auto">
+    <div class="max-w-3xl">
+
+      <!-- Preheader -->
+      <div class="flex items-center gap-3 mb-6 opacity-0-init" style="transition-delay: 0.1s;">
+        <span class="h-px w-12" style="background: #d3af67;"></span>
+        <span class="text-xs tracking-[0.3em] uppercase font-medium" style="color: #d3af67;">
+          Кам'янець-Подільський
+        </span>
+      </div>
+
+      <!-- Main Title -->
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-light text-white mb-4 leading-tight opacity-0-init"
+          style="font-family: 'Cormorant Garamond', serif; transition-delay: 0.2s;">
+        {{ slides[currentSlide()].title }}
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg md:text-xl text-white/70 mb-10 font-light opacity-0-init"
+         style="font-family: 'Inter', sans-serif; transition-delay: 0.3s;">
+        {{ slides[currentSlide()].subtitle }}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-4 opacity-0-init" style="transition-delay: 0.4s;">
+        <a routerLink="/numbers" class="btn-gold text-sm">
+          Забронювати номер
+        </a>
+        <a routerLink="/gallery" class="btn-outline-gold text-sm">
+          Переглянути галерею
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slider Controls -->
+  <div class="absolute bottom-8 right-4 md:right-8 z-10 flex items-center gap-4">
+    <!-- Dots -->
+    <div class="flex gap-2">
+      @for (slide of slides; track $index) {
+        <button
+          class="transition-all duration-300"
+          [ngClass]="{
+            'w-8 h-1.5 rounded-sm': currentSlide() === $index,
+            'w-2 h-1.5 rounded-sm opacity-40': currentSlide() !== $index
+          }"
+          style="background: #d3af67;"
+          (click)="goToSlide($index)">
+        </button>
+      }
+    </div>
+
+    <!-- Arrows -->
+    <div class="hidden md:flex gap-2">
+      <button (click)="prevSlide()"
+              class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-white/50 transition-all duration-300">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <button (click)="nextSlide()"
+              class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:border-white/50 transition-all duration-300">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 animate-bounce">
+    <span class="text-white/30 text-xs tracking-widest">SCROLL</span>
+    <div class="w-px h-8" style="background: linear-gradient(to bottom, rgba(211,175,103,0.5), transparent);"></div>
+  </div>
+
+</section>
+
+
+<!-- STATS BAR -->
+<section style="background: #111111; border-bottom: 1px solid rgba(211,175,103,0.1);">
+  <div class="max-w-7xl mx-auto px-4 md:px-8 py-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      @for (stat of stats; track stat.label) {
+        <div class="text-center opacity-0-init">
+          <div class="text-3xl md:text-4xl font-light mb-1 gradient-text"
+               style="font-family: 'Cormorant Garamond', serif;">
+            {{ stat.value }}
+          </div>
+          <div class="text-white/40 text-xs tracking-widest uppercase">{{ stat.label }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+
+<!-- ABOUT SECTION -->
+<section class="py-24 px-4 md:px-8" style="background: #0a0a0a;">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Text -->
+      <div class="opacity-0-init">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="h-px w-12" style="background: #d3af67;"></span>
+          <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Про готель</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-light text-white mb-6 leading-tight"
+            style="font-family: 'Cormorant Garamond', serif;">
+          Ваш Ідеальний<br>
+          <span class="gradient-text">Відпочинок</span>
+        </h2>
+        <p class="text-white/60 leading-relaxed mb-5">
+          Готель «Клеопатра» розташований у самому серці Старого міста Кам'янця-Подільського —
+          на вул. Татарській, 19, поруч із легендарною фортецею. 82 комфортних номери,
+          ресторан «За Тином», SPA та власний боулінг.
+        </p>
+        <p class="text-white/60 leading-relaxed mb-8">
+          Наша команда прагне зробити ваше перебування незабутнім, поєднуючи
+          розкіш з теплом справжнього українського гостинності.
+        </p>
+        <a routerLink="/numbers" class="btn-gold text-sm">
+          Переглянути номери
+        </a>
+      </div>
+
+      <!-- Image Grid -->
+      <div class="grid grid-cols-2 gap-4 opacity-0-init">
+        <div class="rounded-2xl overflow-hidden aspect-square">
+          <img src="https://kleopatra-hotel.com/images/Slide/Hotel/7.jpg"
+               alt="Готель Клеопатра" class="w-full h-full object-cover">
+        </div>
+        <div class="rounded-2xl overflow-hidden aspect-square mt-8">
+          <img src="https://kleopatra-hotel.com/images/Slide/Hotel/4.jpg"
+               alt="Готель Клеопатра — номери" class="w-full h-full object-cover">
+        </div>
+        <div class="rounded-2xl overflow-hidden col-span-2 h-40">
+          <img src="https://kleopatra-hotel.com/images/Slide/relacs/3.jpg"
+               alt="SPA та басейн готелю Клеопатра" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- BENTO GRID - Services -->
+<section class="py-24 px-4 md:px-8" style="background: #080808;">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-16 opacity-0-init">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="h-px w-12" style="background: #d3af67;"></span>
+        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Послуги</span>
+        <span class="h-px w-12" style="background: #d3af67;"></span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-light text-white"
+          style="font-family: 'Cormorant Garamond', serif;">
+        Все для <span class="gradient-text">вашого комфорту</span>
+      </h2>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+      <!-- Large card - Rooms -->
+      <div class="lg:col-span-2 lg:row-span-2 relative overflow-hidden rounded-3xl group opacity-0-init"
+           style="min-height: 400px;">
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+             style="background-image: url('https://kleopatra-hotel.com/images/Slide/Hotel/3.jpg');"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+             style="background: rgba(211,175,103,0.05);"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-8">
+          <span class="text-4xl mb-3 block">🏨</span>
+          <h3 class="text-3xl font-light text-white mb-2"
+              style="font-family: 'Cormorant Garamond', serif;">Номери</h3>
+          <p class="text-white/60 mb-5">Стандарт, Люкс, Бізнес та VIP — оберіть свій ідеальний номер</p>
+          <a routerLink="/numbers" class="btn-gold text-sm">
+            Переглянути номери
+          </a>
+        </div>
+      </div>
+
+      <!-- Restaurant -->
+      <div class="relative overflow-hidden rounded-3xl group opacity-0-init" style="min-height: 190px;">
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+             style="background-image: url('https://kleopatra-hotel.com/images/Slide/restorans/1.jpg'); background-color: #1a1a1a;"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <span class="text-2xl mb-2 block">🍽️</span>
+          <h3 class="text-xl font-light text-white mb-1" style="font-family: 'Cormorant Garamond', serif;">Ресторан «За Тином»</h3>
+          <p class="text-white/50 text-sm mb-3">Банкети, тераса, сніданки-шведський стіл</p>
+          <a routerLink="/restaurants" class="text-xs font-medium transition-colors" style="color: #d3af67;">
+            Детальніше →
+          </a>
+        </div>
+      </div>
+
+      <!-- Leisure -->
+      <div class="relative overflow-hidden rounded-3xl group opacity-0-init" style="min-height: 190px;">
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+             style="background-image: url('https://kleopatra-hotel.com/images/Slide/relacs/1.jpg'); background-color: #1a1a1a;"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <span class="text-2xl mb-2 block">♨️</span>
+          <h3 class="text-xl font-light text-white mb-1" style="font-family: 'Cormorant Garamond', serif;">Дозвілля</h3>
+          <p class="text-white/50 text-sm mb-3">SPA та розваги</p>
+          <a routerLink="/leisure" class="text-xs font-medium transition-colors" style="color: #d3af67;">
+            Детальніше →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Second Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+
+      <!-- Business -->
+      <div class="relative overflow-hidden rounded-3xl group opacity-0-init" style="min-height: 180px;">
+        <div class="absolute inset-0" style="background: linear-gradient(135deg, #111, #1a1509);"></div>
+        <div class="absolute inset-0 opacity-30 group-hover:opacity-50 transition-opacity duration-300"
+             style="background: url('https://kleopatra-hotel.com/images/Slide/Busines/Biznes_Konfer_2.jpg') center/cover;"></div>
+        <div class="absolute inset-0 p-8 flex flex-col justify-between">
+          <span class="text-3xl">💼</span>
+          <div>
+            <h3 class="text-2xl font-light text-white mb-2" style="font-family: 'Cormorant Garamond', serif;">Бізнес</h3>
+            <p class="text-white/50 text-sm mb-3">Конференц-зал 160 місць та офіс-центр</p>
+            <a routerLink="/biznes" class="text-xs font-medium transition-colors" style="color: #d3af67;">
+              Детальніше →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tourism -->
+      <div class="relative overflow-hidden rounded-3xl group opacity-0-init" style="min-height: 180px;">
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+             style="background-image: url('https://kleopatra-hotel.com/images/stories/7_chudes.jpg'); background-color: #1a1a1a;"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>
+        <div class="absolute inset-0 p-8 flex flex-col justify-between">
+          <span class="text-3xl">🏰</span>
+          <div>
+            <h3 class="text-2xl font-light text-white mb-2" style="font-family: 'Cormorant Garamond', serif;">Туризм</h3>
+            <p class="text-white/50 text-sm mb-3">7 чудес Кам'янця — фортеця, каньйон, костел</p>
+            <a routerLink="/turizm" class="text-xs font-medium transition-colors" style="color: #d3af67;">
+              Детальніше →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- BOOKING FORM -->
+<section class="py-24 px-4 md:px-8" style="background: #0a0a0a;">
+  <div class="max-w-5xl mx-auto">
+    <div class="glass-card p-8 md:p-12 opacity-0-init">
+
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-light text-white mb-3"
+            style="font-family: 'Cormorant Garamond', serif;">
+          Забронюйте <span class="gradient-text">номер онлайн</span>
+        </h2>
+        <p class="text-white/50 text-sm">Швидко та зручно. Підтвердження протягом 1 години.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <!-- Check-in -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs tracking-widest uppercase text-white/40">Заїзд</label>
+          <input type="date"
+                 class="w-full px-4 py-3 rounded-xl text-white text-sm transition-all duration-300 focus:outline-none focus:border-gold"
+                 style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+        </div>
+        <!-- Check-out -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs tracking-widest uppercase text-white/40">Виїзд</label>
+          <input type="date"
+                 class="w-full px-4 py-3 rounded-xl text-white text-sm transition-all duration-300 focus:outline-none focus:border-gold"
+                 style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+        </div>
+        <!-- Guests -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs tracking-widest uppercase text-white/40">Гостей</label>
+          <select class="w-full px-4 py-3 rounded-xl text-white text-sm transition-all duration-300 focus:outline-none"
+                  style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+            <option value="1" style="background: #111;">1 гість</option>
+            <option value="2" style="background: #111;">2 гості</option>
+            <option value="3" style="background: #111;">3 гості</option>
+            <option value="4" style="background: #111;">4+ гості</option>
+          </select>
+        </div>
+        <!-- Room Type -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs tracking-widest uppercase text-white/40">Тип номера</label>
+          <select class="w-full px-4 py-3 rounded-xl text-white text-sm transition-all duration-300 focus:outline-none"
+                  style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+            <option value="any" style="background: #111;">Будь-який</option>
+            <option value="standard" style="background: #111;">Стандарт</option>
+            <option value="lux" style="background: #111;">Люкс</option>
+            <option value="biznes" style="background: #111;">Бізнес</option>
+            <option value="vip" style="background: #111;">VIP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a routerLink="/numbers" class="btn-gold">
+          Перевірити наявність
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- WHY US -->
+<section class="py-24 px-4 md:px-8" style="background: #080808;">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-16 opacity-0-init">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="h-px w-12" style="background: #d3af67;"></span>
+        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Переваги</span>
+        <span class="h-px w-12" style="background: #d3af67;"></span>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-light text-white"
+          style="font-family: 'Cormorant Garamond', serif;">
+        Чому обирають <span class="gradient-text">Клеопатру</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (feature of [
+        {icon: '🌟', title: 'Преміум сервіс', desc: 'Персональний підхід до кожного гостя та цілодобова підтримка рецепції'},
+        {icon: '📍', title: 'Ідеальне розташування', desc: 'У самому серці Кам\'янця-Подільського, поряд з головними пам\'ятками'},
+        {icon: '🍳', title: 'Авторська кухня', desc: 'Власний ресторан з українськими та європейськими стравами'},
+        {icon: '🅿️', title: 'Безкоштовний паркінг', desc: 'Охоронюваний паркінг для гостей готелю на 50+ місць'},
+        {icon: '📶', title: 'Швидкий Wi-Fi', desc: 'Безлімітний інтернет у всіх зонах готелю'},
+        {icon: '♨️', title: 'SPA & Wellness', desc: 'Сауна, масаж та процедури для повного відновлення'}
+      ]; track feature.title) {
+        <div class="glass-card p-6 hover:border-gold/30 transition-all duration-300 group opacity-0-init cursor-default">
+          <div class="text-3xl mb-4">{{ feature.icon }}</div>
+          <h3 class="text-lg font-medium text-white mb-2 group-hover:text-gold transition-colors duration-300"
+              style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem;">
+            {{ feature.title }}
+          </h3>
+          <p class="text-white/50 text-sm leading-relaxed">{{ feature.desc }}</p>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CTA BANNER -->
+<section class="py-24 px-4 md:px-8 relative overflow-hidden opacity-0-init"
+         style="background: linear-gradient(135deg, #0a0a0a 0%, #1a0a05 50%, #0a0a0a 100%);">
+  <div class="absolute inset-0 opacity-5"
+       style="background: url('https://www.kleopatra-hotel.com/images/hotel/kleopatra-hotel-kamianets-podilskyi-1.jpg') center/cover;">
+  </div>
+  <div class="relative z-10 max-w-3xl mx-auto text-center">
+    <h2 class="text-4xl md:text-6xl font-light text-white mb-6"
+        style="font-family: 'Cormorant Garamond', serif;">
+      Готові до <span class="gradient-text">незабутнього</span> відпочинку?
+    </h2>
+    <p class="text-white/60 mb-10 text-lg">
+      Забронюйте номер вже сьогодні та отримайте сніданок у подарунок
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a routerLink="/numbers" class="btn-gold">
+        Забронювати зараз
+      </a>
+      <a routerLink="/contacts" class="btn-outline-gold">
+        Зв'язатися з нами
+      </a>
+    </div>
+  </div>
+</section>
