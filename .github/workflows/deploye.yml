@@ -1,58 +1,56 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - master
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+    push:
+        branches:
+            - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+    deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
+            - name: Install Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Install dependencies
+              run: npm ci
 
-      - name: Build Angular app
-        run: npx ng build --configuration production --base-href /
+            - name: Build Angular app
+              run: npm run build
 
-      - name: Copy CNAME and 404.html
-        run: |
-          cp CNAME dist/kleopatra-hotel/browser/CNAME
-          cp dist/kleopatra-hotel/browser/index.html dist/kleopatra-hotel/browser/404.html
+            - name: Copy CNAME and 404.html
+              run: |
+                  cp CNAME dist/kleopatra-hotel/browser/CNAME
+                  cp dist/kleopatra-hotel/browser/index.html dist/kleopatra-hotel/browser/404.html
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist/kleopatra-hotel/browser
+            - name: Set up SSH
+              env:
+                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+              run: |
+                  mkdir -p ~/.ssh
+                  echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
+            - name: Deploy to gh-pages branch
+              env:
+                  GIT_SSH_COMMAND: 'ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no'
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+                  cd dist/kleopatra-hotel/browser
+                  git init
+                  git add --all .
+                  git commit -m "Deploy to GitHub Pages"
+                  git checkout -B gh-pages
+                  git push git@github.com:${{ github.repository }} gh-pages --force
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+            - name: Clean up SSH
+              if: always()
+              run: rm -f ~/.ssh/id_rsa ~/.ssh/known_hosts
