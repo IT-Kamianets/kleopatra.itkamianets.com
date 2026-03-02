@@ -1,135 +1,119 @@
-import { Component, OnInit, OnDestroy, signal, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, NgZone, inject, signal, ViewChild, ElementRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgClass } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ScrollAnimateDirective } from '../../shared/scroll-animate.directive';
 
-interface Slide {
-  image: string;
-  title: string;
-  subtitle: string;
+interface Stat {
+  num: number;
+  suffix: string;
+  label: string;
+  isStatic?: boolean;
 }
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, NgClass],
+  imports: [RouterLink, ScrollAnimateDirective],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
-export class Home implements OnInit, OnDestroy, AfterViewInit {
-  currentSlide = signal(0);
-  private slideTimer: ReturnType<typeof setInterval> | null = null;
+export class Home implements AfterViewInit {
+  @ViewChild('heroVideo') heroVideo!: ElementRef<HTMLVideoElement>;
 
-  slides: Slide[] = [
-    {
-      image: 'https://kleopatra-hotel.com/images/Slide/Index/6.jpg',
-      title: 'Готель Клеопатра',
-      subtitle: 'Розкіш у серці Кам\'янця-Подільського'
-    },
-    {
-      image: 'https://kleopatra-hotel.com/images/Slide/Hotel/3.jpg',
-      title: 'Комфорт & Елегантність',
-      subtitle: '82 номери преміум-класу для вашого ідеального відпочинку'
-    },
-    {
-      image: 'https://kleopatra-hotel.com/images/Slide/restorans/3.jpg',
-      title: 'Ресторан «За Тином»',
-      subtitle: 'Банкети, весілля, сніданки-шведський стіл та тераса'
-    },
-    {
-      image: 'https://kleopatra-hotel.com/cache/preview/73d316d6d8246ef20833e11bdfc2218e.jpg',
-      title: 'Відпочинок & Розваги',
-      subtitle: 'Боулінг, більярд, басейн, хамам — безкоштовно для гостей'
-    }
-  ];
+  private ngZone = inject(NgZone);
+  private sanitizer = inject(DomSanitizer);
 
-  stats = [
-    { value: '82+', label: 'Номерів' },
-    { value: '13+', label: 'Люксів' },
-    { value: '4★', label: 'Зірки' },
-    { value: '24/7', label: 'Рецепція' }
-  ];
-
-  bentoItems = [
-    {
-      title: 'Номери',
-      desc: '82 номери: Стандарт, Люкс, Бізнес-панорамний, VIP-Апартаменти',
-      icon: '🏨',
-      path: '/numbers',
-      large: true,
-      bg: 'https://kleopatra-hotel.com/images/Slide/Hotel/3.jpg'
-    },
-    {
-      title: 'Ресторан',
-      desc: 'Ресторан «За Тином» — банкети, сніданки-шведський стіл, тераса',
-      icon: '🍽️',
-      path: '/restaurants',
-      large: false,
-      bg: 'https://kleopatra-hotel.com/images/Slide/restorans/1.jpg'
-    },
-    {
-      title: 'Дозвілля',
-      desc: 'Басейн, боулінг, більярд, SPA, хамам — безкоштовно для гостей',
-      icon: '♨️',
-      path: '/leisure',
-      large: false,
-      bg: 'https://kleopatra-hotel.com/images/Slide/relacs/1.jpg'
-    },
-    {
-      title: 'Бізнес',
-      desc: 'Конференц-зал 160 місць, зал презентацій, офіс-центр',
-      icon: '💼',
-      path: '/biznes',
-      large: false,
-      bg: 'https://kleopatra-hotel.com/images/Slide/Busines/Biznes_Konfer_2.jpg'
-    }
-  ];
-
-  ngOnInit(): void {
-    this.startSlider();
+  private svg(raw: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(raw);
   }
+
+
+  stats: Stat[] = [
+    { num: 82, suffix: '+', label: 'Номерів' },
+    { num: 13, suffix: '+', label: 'Люксів' },
+    { num: 4, suffix: '★', label: 'Зірки' },
+    { num: 0, suffix: '24/7', label: 'Рецепція', isStatic: true }
+  ];
+
+  displayStats = signal<string[]>(['0+', '0+', '0★', '24/7']);
+
+  features: { icon: SafeHtml; title: string; desc: string }[] = [
+    {
+      icon: this.svg('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>'),
+      title: 'Преміум сервіс',
+      desc: 'Персональний підхід до кожного гостя та цілодобова підтримка рецепції'
+    },
+    {
+      icon: this.svg('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>'),
+      title: 'Ідеальне розташування',
+      desc: 'У самому серці Кам\'янця-Подільського, поряд з головними пам\'ятками'
+    },
+    {
+      icon: this.svg('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>'),
+      title: 'Авторська кухня',
+      desc: 'Власний ресторан з українськими та європейськими стравами'
+    },
+    {
+      icon: this.svg('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="16" r="1"/></svg>'),
+      title: 'Безкоштовний паркінг',
+      desc: 'Охоронюваний паркінг для гостей готелю на 50+ місць'
+    },
+    {
+      icon: this.svg('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="0.5" fill="currentColor"/></svg>'),
+      title: 'Швидкий Wi-Fi',
+      desc: 'Безлімітний інтернет у всіх зонах готелю'
+    },
+    {
+      icon: this.svg('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>'),
+      title: 'SPA & Wellness',
+      desc: 'Сауна, масаж та процедури для повного відновлення'
+    }
+  ];
 
   ngAfterViewInit(): void {
-    this.initScrollAnimations();
-  }
-
-  ngOnDestroy(): void {
-    if (this.slideTimer) clearInterval(this.slideTimer);
-  }
-
-  startSlider(): void {
-    this.slideTimer = setInterval(() => {
-      this.nextSlide();
-    }, 5000);
-  }
-
-  nextSlide(): void {
-    this.currentSlide.update(i => (i + 1) % this.slides.length);
-  }
-
-  prevSlide(): void {
-    this.currentSlide.update(i => (i - 1 + this.slides.length) % this.slides.length);
-  }
-
-  goToSlide(index: number): void {
-    this.currentSlide.set(index);
-    if (this.slideTimer) {
-      clearInterval(this.slideTimer);
-      this.startSlider();
+    this.initCounters();
+    const video = this.heroVideo?.nativeElement;
+    if (video) {
+      video.muted = true;
+      video.play().catch(() => {});
     }
   }
 
-  initScrollAnimations(): void {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
+  private initCounters(): void {
+    const section = document.getElementById('stats-section');
+    if (!section) return;
 
-    document.querySelectorAll('.opacity-0-init').forEach(el => observer.observe(el));
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        observer.disconnect();
+        this.stats.forEach((stat, i) => {
+          if (stat.isStatic) return;
+          this.animateCounter(i, stat.num, stat.suffix, i * 180);
+        });
+      }
+    }, { threshold: 0.5 });
+
+    observer.observe(section);
   }
+
+  private animateCounter(index: number, target: number, suffix: string, delay: number): void {
+    const duration = 1600;
+    setTimeout(() => {
+      const startTime = performance.now();
+      const step = (now: number) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(target * eased);
+        this.ngZone.run(() => {
+          this.displayStats.update(vals => {
+            const next = [...vals];
+            next[index] = current + suffix;
+            return next;
+          });
+        });
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, delay);
+  }
+
 }

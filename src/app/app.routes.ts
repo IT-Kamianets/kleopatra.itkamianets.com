@@ -32,6 +32,11 @@ export const routes: Routes = [
     title: 'Туризм — Готель Клеопатра'
   },
   {
+    path: 'menu',
+    loadComponent: () => import('./pages/menu/menu').then(m => m.Menu),
+    title: 'Меню — Ресторан «За Тином»'
+  },
+  {
     path: 'gallery',
     loadComponent: () => import('./pages/gallery/gallery').then(m => m.Gallery),
     title: 'Галерея — Готель Клеопатра'

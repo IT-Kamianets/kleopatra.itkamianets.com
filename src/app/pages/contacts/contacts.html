@@ -1,5 +1,5 @@
 <!-- HERO -->
-<section class="relative pt-32 pb-20 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-24 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #050a08 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-15"
        style="background: radial-gradient(ellipse at 50% 0%, #531e10 0%, transparent 60%);"></div>
@@ -9,7 +9,7 @@
       <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Зв'яжіться з нами</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
-    <h1 class="text-5xl md:text-7xl font-light text-white mb-4"
+    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
       <span class="gradient-text">Контакти</span>
     </h1>
@@ -20,12 +20,12 @@
 </section>
 
 <!-- MAIN CONTENT -->
-<section class="py-20 px-4 md:px-8" style="background: #0a0a0a;">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+<section class="py-12 md:py-20 lg:py-28 xl:py-36 px-4 md:px-8 lg:px-12 xl:px-16" style="background: #0a0a0a;">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 xl:gap-24">
 
     <!-- FORM -->
-    <div class="opacity-0-init">
-      <h2 class="text-3xl font-light text-white mb-8" style="font-family: 'Cormorant Garamond', serif;">
+    <div appScrollAnimate>
+      <h2 class="text-3xl lg:text-4xl xl:text-5xl font-light text-white mb-8" style="font-family: 'Cormorant Garamond', serif;">
         Написати нам
       </h2>
 
@@ -40,7 +40,7 @@
         </div>
       }
 
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4" novalidate>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-3 sm:space-y-4" novalidate>
 
         <!-- Name -->
         <div>
@@ -140,16 +140,16 @@
     </div>
 
     <!-- CONTACT INFO + MAP -->
-    <div class="space-y-6 opacity-0-init">
-      <h2 class="text-3xl font-light text-white mb-8" style="font-family: 'Cormorant Garamond', serif;">
+    <div class="space-y-6" appScrollAnimate>
+      <h2 class="text-3xl lg:text-4xl xl:text-5xl font-light text-white mb-8" style="font-family: 'Cormorant Garamond', serif;">
         Наші контакти
       </h2>
 
       <!-- Info Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5">
         @for (info of contactInfo; track info.title) {
           <div class="glass-card p-5">
-            <div class="text-2xl mb-2">{{ info.icon }}</div>
+            <div class="mb-2" style="color: #d3af67;" [innerHTML]="info.icon"></div>
             <div class="text-xs tracking-widest uppercase text-white/40 mb-2">{{ info.title }}</div>
             @for (line of info.lines; track line) {
               <p class="text-white/80 text-sm">{{ line }}</p>
@@ -159,11 +159,11 @@
       </div>
 
       <!-- Map -->
-      <div class="rounded-2xl overflow-hidden border border-white/10" style="height: 320px;">
+      <div class="rounded-2xl overflow-hidden border border-white/10 h-[280px] lg:h-[380px] xl:h-[460px]">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2617.8!2d26.5689!3d48.6720!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQwJzE5LjIiTiAyNsKwMzQnMDguNCJF!5e0!3m2!1suk!2sua!4v1710000000"
           width="100%"
-          height="320"
+          height="100%"
           style="border:0; filter: invert(90%) hue-rotate(180deg) saturate(0.8);"
           allowfullscreen
           loading="lazy"

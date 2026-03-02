@@ -1,5 +1,5 @@
 <!-- HERO -->
-<section class="relative pt-32 pb-20 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-24 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #050a08 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-15"
        style="background: radial-gradient(ellipse at 50% 0%, #0a3020 0%, transparent 60%);"></div>
@@ -9,7 +9,7 @@
       <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Відпочинок та оздоровлення</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
-    <h1 class="text-5xl md:text-7xl font-light text-white mb-4"
+    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
       <span class="gradient-text">Дозвілля</span> & Wellness
     </h1>
@@ -20,13 +20,14 @@
 </section>
 
 <!-- SERVICES GRID -->
-<section class="py-20 px-4 md:px-8" style="background: #0a0a0a;">
+<section class="py-12 md:py-20 lg:py-28 xl:py-36 px-4 md:px-8 lg:px-12 xl:px-16" style="background: #0a0a0a;">
   <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      @for (service of services; track service.title) {
-        <div class="glass-card p-8 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 group opacity-0-init cursor-default">
-          <div class="text-4xl mb-5">{{ service.icon }}</div>
-          <h3 class="text-2xl font-light text-white mb-3 group-hover:text-gold transition-colors duration-300"
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10">
+      @for (service of services; track service.title; let i = $index) {
+        <div class="glass-card p-5 sm:p-6 md:p-8 lg:p-10 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 group cursor-default"
+             appScrollAnimate [style.transition-delay]="(i * 80) + 'ms'">
+          <div class="mb-5" style="color: #d3af67;" [innerHTML]="service.icon"></div>
+          <h3 class="text-xl md:text-2xl lg:text-3xl font-light text-white mb-3 group-hover:text-gold transition-colors duration-300"
               style="font-family: 'Cormorant Garamond', serif; color: inherit;">
             {{ service.title }}
           </h3>
@@ -38,22 +39,24 @@
 </section>
 
 <!-- SPA HIGHLIGHT -->
-<section class="py-20 px-4 md:px-8" style="background: #080808;">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<section class="py-12 md:py-20 lg:py-28 xl:py-36 px-4 md:px-8 lg:px-12 xl:px-16" style="background: #080808;">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 xl:gap-28 items-center">
     <!-- Image -->
-    <div class="rounded-3xl overflow-hidden opacity-0-init" style="height: 450px;">
-      <img src="https://kleopatra-hotel.com/images/Slide/relacs/2.jpg"
-           alt="SPA та дозвілля готелю Клеопатра"
+    <div class="rounded-3xl overflow-hidden h-[200px] sm:h-[280px] md:h-[380px] lg:h-[450px] xl:h-[560px]" appScrollAnimate>
+      <img src="assets/img/gallery/event-022.jpg"
+           alt="Сауна SPA-центру готелю Клеопатра"
+           appParallax
+           loading="lazy"
            class="w-full h-full object-cover">
     </div>
 
     <!-- Text -->
-    <div class="opacity-0-init">
+    <div appScrollAnimate>
       <div class="flex items-center gap-3 mb-6">
         <span class="h-px w-12" style="background: #d3af67;"></span>
         <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">SPA-центр</span>
       </div>
-      <h2 class="text-4xl font-light text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">
+      <h2 class="text-4xl lg:text-5xl xl:text-6xl font-light text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">
         Повне <span class="gradient-text">відновлення</span> тіла та душі
       </h2>
       <p class="text-white/60 leading-relaxed mb-5">

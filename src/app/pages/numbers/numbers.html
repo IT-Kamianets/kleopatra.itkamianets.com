@@ -1,5 +1,5 @@
 <!-- PAGE HERO -->
-<section class="relative pt-32 pb-20 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-24 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #0d0502 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-20"
        style="background: radial-gradient(ellipse at 50% 0%, #531e10 0%, transparent 60%);"></div>
@@ -9,7 +9,7 @@
       <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Готель Клеопатра</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
-    <h1 class="text-5xl md:text-7xl font-light text-white mb-4"
+    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
       Наші <span class="gradient-text">Номери</span>
     </h1>
@@ -20,7 +20,7 @@
 </section>
 
 <!-- FILTER TABS -->
-<section class="sticky top-16 md:top-20 z-40 px-4 py-4 border-b"
+<section class="sticky top-16 md:top-20 lg:top-24 z-40 px-4 py-4 border-b"
          style="background: rgba(10,10,10,0.95); backdrop-filter: blur(16px); border-color: rgba(255,255,255,0.05);">
   <div class="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
     @for (cat of categories; track cat.id) {
@@ -39,12 +39,13 @@
 </section>
 
 <!-- ROOMS GRID -->
-<section class="py-16 px-4 md:px-8" style="background: #0a0a0a;">
+<section class="py-16 lg:py-20 xl:py-24 px-4 md:px-8 lg:px-12 xl:px-16" style="background: #0a0a0a;">
   <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-      @for (room of filteredRooms; track room.id) {
-        <div class="group relative rounded-3xl overflow-hidden border border-white/5 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 opacity-0-init"
-             style="background: #111;">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-8 xl:gap-10">
+      @for (room of filteredRooms; track room.id; let i = $index) {
+        <div class="group relative rounded-3xl overflow-hidden border border-white/5 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1"
+             style="background: #111;"
+             appScrollAnimate [style.transition-delay]="(i * 80) + 'ms'">
 
           <!-- Badge -->
           @if (room.badge) {
@@ -55,7 +56,7 @@
           }
 
           <!-- Image -->
-          <div class="relative overflow-hidden h-56">
+          <div class="relative overflow-hidden h-44 sm:h-52 lg:h-64 xl:h-72">
             <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                  [style.background-image]="'url(' + room.image + ')'"
                  style="background-color: #1a1a1a;">
@@ -72,7 +73,7 @@
           </div>
 
           <!-- Card Body -->
-          <div class="p-6">
+          <div class="p-4 sm:p-5 lg:p-8">
             <!-- Meta -->
             <div class="flex gap-4 mb-4">
               <div class="flex items-center gap-1.5">
@@ -114,7 +115,7 @@
   <div class="max-w-2xl mx-auto">
     <p class="text-white/50 mb-4">Є питання? Наша рецепція працює 24/7</p>
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="tel:+380384320333" class="btn-gold">
+      <a href="tel:+380384991652" class="btn-gold">
         Зателефонувати
       </a>
       <a routerLink="/contacts" class="btn-outline-gold">

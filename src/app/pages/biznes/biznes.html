@@ -1,5 +1,5 @@
 <!-- HERO -->
-<section class="relative pt-32 pb-20 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-24 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #050508 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-15"
        style="background: radial-gradient(ellipse at 50% 0%, #1e1a53 0%, transparent 60%);"></div>
@@ -9,7 +9,7 @@
       <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Корпоративні послуги</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
-    <h1 class="text-5xl md:text-7xl font-light text-white mb-4"
+    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
       <span class="gradient-text">Бізнес</span>-сервіс
     </h1>
@@ -20,13 +20,14 @@
 </section>
 
 <!-- SERVICES -->
-<section class="py-20 px-4 md:px-8" style="background: #0a0a0a;">
+<section class="py-12 md:py-20 lg:py-28 xl:py-36 px-4 md:px-8 lg:px-12 xl:px-16" style="background: #0a0a0a;">
   <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-      @for (service of services; track service.title) {
-        <div class="glass-card p-8 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 group opacity-0-init cursor-default">
-          <div class="text-4xl mb-5">{{ service.icon }}</div>
-          <h3 class="text-2xl font-light text-white mb-3" style="font-family: 'Cormorant Garamond', serif;">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10 mb-10 sm:mb-14 lg:mb-20">
+      @for (service of services; track service.title; let i = $index) {
+        <div class="glass-card p-5 sm:p-6 md:p-8 lg:p-10 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 group cursor-default"
+             appScrollAnimate [style.transition-delay]="(i * 80) + 'ms'">
+          <div class="mb-5" style="color: #d3af67;" [innerHTML]="service.icon"></div>
+          <h3 class="text-xl md:text-2xl lg:text-3xl font-light text-white mb-3" style="font-family: 'Cormorant Garamond', serif;">
             {{ service.title }}
           </h3>
           <p class="text-white/50 leading-relaxed text-sm">{{ service.desc }}</p>
@@ -35,13 +36,13 @@
     </div>
 
     <!-- Conference Hall Detail -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center opacity-0-init">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 xl:gap-28 items-center" appScrollAnimate>
       <div>
         <div class="flex items-center gap-3 mb-6">
           <span class="h-px w-12" style="background: #d3af67;"></span>
           <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Конференц-зал</span>
         </div>
-        <h2 class="text-4xl font-light text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">
+        <h2 class="text-4xl lg:text-5xl xl:text-6xl font-light text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">
           Ідеальний простір для <span class="gradient-text">ваших заходів</span>
         </h2>
         <p class="text-white/60 leading-relaxed mb-6">
@@ -49,7 +50,7 @@
           презентацій, ділових зустрічей, семінарів та майстер-класів. Сучасне
           обладнання та підтримка офіс-менеджера гарантують успіх вашого заходу.
         </p>
-        <div class="grid grid-cols-2 gap-3 mb-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-8">
           @for (spec of conferenceSpecs; track spec.label) {
             <div class="glass-card p-4">
               <div class="text-xs text-white/40 mb-1">{{ spec.label }}</div>
@@ -59,9 +60,11 @@
         </div>
         <a routerLink="/contacts" class="btn-gold">Замовити зал</a>
       </div>
-      <div class="rounded-3xl overflow-hidden" style="height: 400px;">
-        <img src="https://kleopatra-hotel.com/images/Slide/Busines/Biznes_Konfer_2.jpg"
+      <div class="rounded-3xl overflow-hidden h-[180px] sm:h-[260px] md:h-[340px] lg:h-[400px] xl:h-[520px]">
+        <img src="assets/img/gallery/misc-03.jpg"
              alt="Конференц-зал готелю Клеопатра"
+             appParallax
+             loading="lazy"
              class="w-full h-full object-cover">
       </div>
     </div>

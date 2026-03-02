@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://kleopatra-hotel.com/images/Slide/Index/6.jpg" alt="Готель Клеопатра" width="100%" style="border-radius: 12px; max-height: 400px; object-fit: cover;">
+<img src="public/assets/img/gallery/event-028.jpg" alt="Готель Клеопатра" width="100%" style="border-radius: 12px; max-height: 400px; object-fit: cover;">
 
 <br><br>
 

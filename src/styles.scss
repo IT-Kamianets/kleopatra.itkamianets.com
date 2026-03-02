@@ -55,6 +55,16 @@
       box-shadow: 0 0 20px rgba(211, 175, 103, 0.2);
     }
   }
+}
+
+@media (max-width: 640px) {
+  .btn-gold,
+  .btn-outline-gold {
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@layer components {
 
   .glass-card {
     background: rgba(17, 17, 17, 0.7);
@@ -89,6 +99,14 @@
     opacity: 1 !important;
     transform: translateY(0) !important;
   }
+
+  .bento-rooms-card {
+    transition: box-shadow 0.4s ease;
+
+    &:hover {
+      box-shadow: 0 0 40px rgba(211, 175, 103, 0.3);
+    }
+  }
 }
 
 @keyframes fadeUp {
@@ -116,3 +134,65 @@
 ::-webkit-scrollbar-track { background: #0a0a0a; }
 ::-webkit-scrollbar-thumb { background: #d3af67; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #e8c97c; }
+
+/* Custom cursor — desktop only */
+@media (hover: hover) and (pointer: fine) {
+  *, *::before, *::after { cursor: none !important; }
+}
+
+@media not ((hover: hover) and (pointer: fine)) {
+  .cursor-dot, .cursor-ring { display: none !important; }
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d3af67;
+  pointer-events: none;
+  z-index: 9999;
+  left: var(--cursor-x, -100px);
+  top: var(--cursor-y, -100px);
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+
+  &.cursor-hover {
+    width: 6px;
+    height: 6px;
+    background: #e8c97c;
+  }
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(211, 175, 103, 0.6);
+  pointer-events: none;
+  z-index: 9998;
+  left: var(--cursor-x, -100px);
+  top: var(--cursor-y, -100px);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s, left 0.08s linear, top 0.08s linear;
+
+  &.cursor-hover {
+    width: 56px;
+    height: 56px;
+    border-color: rgba(211, 175, 103, 0.9);
+  }
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
