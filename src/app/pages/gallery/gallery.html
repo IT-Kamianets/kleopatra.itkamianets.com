@@ -1,20 +1,20 @@
 <!-- HERO -->
-<section class="relative pt-24 md:pt-32 lg:pt-40 pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-16 sm:pt-20 md:pt-32 lg:pt-40 pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #080508 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-15"
        style="background: radial-gradient(ellipse at 50% 0%, #531e10 0%, transparent 60%);"></div>
   <div class="relative z-10 max-w-7xl mx-auto text-center">
     <div class="flex items-center justify-center gap-3 mb-4">
       <span class="h-px w-12" style="background: #d3af67;"></span>
-      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Фото</span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'gallery.label' | translate }}</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
-      <span class="gradient-text">Галерея</span>
+      <span class="gradient-text">{{ 'gallery.title' | translate }}</span>
     </h1>
     <p class="text-white/50 max-w-xl mx-auto">
-      Поринь в атмосферу готелю Клеопатра ще до приїзду
+      {{ 'gallery.subtitle' | translate }}
     </p>
   </div>
 </section>
@@ -23,7 +23,7 @@
 <section class="sticky top-16 md:top-20 lg:top-24 z-40 px-4 py-4 border-b"
          style="background: rgba(10,10,10,0.95); backdrop-filter: blur(16px); border-color: rgba(255,255,255,0.05);">
   <div class="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
-    @for (cat of categories; track cat.id) {
+    @for (cat of categories(); track cat.id) {
       <button
         class="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
         [ngClass]="{

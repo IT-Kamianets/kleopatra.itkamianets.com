@@ -1,0 +1,178 @@
+@if (room()) {
+
+<!-- HERO -->
+<section class="relative pt-16 md:pt-20 lg:pt-24 overflow-hidden" style="background: #0a0a0a;">
+  <!-- Hero Image -->
+  <div class="relative h-[55vh] md:h-[65vh] lg:h-[75vh] overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center"
+         [style.background-image]="'url(' + room()!.heroImage + ')'"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
+
+    <!-- Back -->
+    <a routerLink="/numbers"
+       class="absolute top-4 left-4 md:top-6 md:left-6 flex items-center gap-2 px-4 py-2 rounded-full text-sm text-white/80 hover:text-white transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm"
+       style="background: rgba(0,0,0,0.4);">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      {{ 'roomDetail.backBtn' | translate }}
+    </a>
+
+    <!-- Title overlay -->
+    <div class="absolute bottom-0 left-0 right-0 px-4 md:px-8 lg:px-16 pb-8 md:pb-12 max-w-7xl mx-auto">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="h-px w-10" style="background: #d3af67;"></span>
+        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'roomDetail.hotelLabel' | translate }}</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-2 leading-tight"
+          style="font-family: 'Cormorant Garamond', serif;">
+        {{ room()!.title }}
+      </h1>
+      <p class="text-white/60 text-lg md:text-xl font-light">{{ room()!.subtitle }}</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- DESCRIPTION + INCLUDED -->
+<section class="py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-16 xl:px-20" style="background: #0a0a0a;">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+
+    <!-- Description -->
+    <div class="lg:col-span-2" appScrollAnimate>
+      <p class="text-white/60 text-base md:text-lg leading-relaxed">{{ room()!.description }}</p>
+    </div>
+
+    <!-- Included -->
+    <div class="glass-card p-6" appScrollAnimate>
+      <h3 class="text-sm tracking-[0.2em] uppercase mb-4" style="color: #d3af67;">{{ 'roomDetail.includedTitle' | translate }}</h3>
+      <ul class="space-y-2">
+        @for (item of room()!.included; track item) {
+          <li class="flex items-center gap-3 text-sm text-white/70">
+            <svg class="w-4 h-4 shrink-0" style="color: #d3af67;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            {{ item }}
+          </li>
+        }
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- VARIANTS -->
+<section class="py-12 md:py-16 px-4 md:px-8 lg:px-16 xl:px-20" style="background: #080808;">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-8" appScrollAnimate>
+      <h2 class="text-3xl md:text-4xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
+        {{ 'roomDetail.variantsTitle' | translate }} <span class="gradient-text">{{ 'roomDetail.variantsSpan' | translate }}</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      @for (v of room()!.variants; track v.name; let i = $index) {
+        <div class="glass-card p-6 md:p-8 flex flex-col hover:border-gold/30 transition-all duration-300"
+             appScrollAnimate [style.transition-delay]="(i * 80) + 'ms'">
+          <h3 class="text-xl font-light text-white mb-1" style="font-family: 'Cormorant Garamond', serif;">
+            {{ v.name }}
+          </h3>
+          <div class="text-lg font-light mb-4" style="color: #d3af67; font-family: 'Cormorant Garamond', serif;">
+            {{ v.price }}
+          </div>
+
+          <div class="flex gap-4 mb-4 text-sm text-white/50">
+            <span>{{ v.size }}</span>
+            <span>·</span>
+            <span>{{ v.capacity }}</span>
+          </div>
+
+          <ul class="space-y-1.5 mb-6 flex-1">
+            @for (d of v.details; track d) {
+              <li class="flex items-center gap-2 text-xs text-white/50">
+                <span class="w-1 h-1 rounded-full shrink-0" style="background: #d3af67;"></span>
+                {{ d }}
+              </li>
+            }
+          </ul>
+
+          <a routerLink="/contacts"
+             class="mt-auto w-full block text-center py-3 rounded-xl text-sm font-medium transition-all duration-300 border border-gold/30 hover:border-gold/70 hover:bg-gold/5"
+             style="color: #d3af67;">
+            {{ 'roomDetail.bookVariantBtn' | translate }}
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+
+<!-- GALLERY -->
+@if (room()!.gallery.length > 0) {
+<section class="py-12 md:py-16 px-4 md:px-8 lg:px-16 xl:px-20" style="background: #0a0a0a;">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-8" appScrollAnimate>
+      <h2 class="text-3xl md:text-4xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
+        {{ 'roomDetail.galleryTitle' | translate }} <span class="gradient-text">{{ 'roomDetail.gallerySpan' | translate }}</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+      @for (img of room()!.gallery; track img; let i = $index) {
+        <div class="rounded-2xl overflow-hidden aspect-[4/3]"
+             appScrollAnimate [style.transition-delay]="(i * 60) + 'ms'">
+          <img [src]="img" [alt]="room()!.title"
+               loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+        </div>
+      }
+    </div>
+  </div>
+</section>
+}
+
+
+<!-- AMENITIES -->
+<section class="py-12 md:py-16 px-4 md:px-8 lg:px-16 xl:px-20" style="background: #080808;">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-8" appScrollAnimate>
+      <h2 class="text-3xl md:text-4xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
+        {{ 'roomDetail.amenitiesTitle' | translate }} <span class="gradient-text">{{ 'roomDetail.amenitiesSpan' | translate }}</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4" appScrollAnimate>
+      @for (a of room()!.amenities; track a) {
+        <div class="glass-card px-4 py-3 flex items-center gap-3">
+          <svg class="w-4 h-4 shrink-0" style="color: #d3af67;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+          <span class="text-xs text-white/70 leading-snug">{{ a }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+
+<!-- BOOKING CTA -->
+<section class="py-16 md:py-20 px-4 text-center" style="background: #0a0a0a;">
+  <div class="max-w-2xl mx-auto" appScrollAnimate>
+    <h2 class="text-3xl md:text-4xl font-light text-white mb-3" style="font-family: 'Cormorant Garamond', serif;">
+      {{ 'roomDetail.bookTitle' | translate }} <span class="gradient-text">{{ 'roomDetail.bookSpan' | translate }}</span>
+    </h2>
+    <p class="text-white/40 text-sm mb-8">{{ 'roomDetail.bookSubtitle' | translate }}</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="tel:+380384991652" class="btn-gold">{{ 'roomDetail.callBtn' | translate }}</a>
+      <a routerLink="/contacts" class="btn-outline-gold">{{ 'roomDetail.writeBtn' | translate }}</a>
+    </div>
+  </div>
+</section>
+
+} @else {
+  <div class="min-h-screen flex items-center justify-center" style="background: #0a0a0a;">
+    <div class="text-center">
+      <p class="text-white/40 mb-4">{{ 'roomDetail.notFound' | translate }}</p>
+      <a routerLink="/numbers" class="btn-gold">{{ 'roomDetail.allRooms' | translate }}</a>
+    </div>
+  </div>
+}

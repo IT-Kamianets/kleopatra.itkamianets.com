@@ -12,6 +12,11 @@ export const routes: Routes = [
     title: 'Номери — Готель Клеопатра'
   },
   {
+    path: 'numbers/:type',
+    loadComponent: () => import('./pages/room-detail/room-detail').then(m => m.RoomDetail),
+    title: 'Номер — Готель Клеопатра'
+  },
+  {
     path: 'restaurants',
     loadComponent: () => import('./pages/restaurants/restaurants').then(m => m.Restaurants),
     title: 'Ресторан — Готель Клеопатра'

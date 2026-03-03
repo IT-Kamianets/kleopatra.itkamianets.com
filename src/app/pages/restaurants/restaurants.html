@@ -1,20 +1,20 @@
 <!-- HERO -->
-<section class="relative pt-24 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-16 sm:pt-20 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #08050a 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-15"
        style="background: radial-gradient(ellipse at 50% 0%, #531e10 0%, transparent 60%);"></div>
   <div class="relative z-10 max-w-7xl mx-auto text-center">
     <div class="flex items-center justify-center gap-3 mb-4">
       <span class="h-px w-12" style="background: #d3af67;"></span>
-      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Гастрономія</span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'restaurants.label' | translate }}</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
-      Ресторан <span class="gradient-text">«За Тином»</span>
+      {{ 'restaurants.title' | translate }} <span class="gradient-text">{{ 'restaurants.span' | translate }}</span>
     </h1>
     <p class="text-white/50 max-w-xl mx-auto">
-      Авторська кухня, вишукані страви та незрівнянна атмосфера
+      {{ 'restaurants.subtitle' | translate }}
     </p>
   </div>
 </section>
@@ -25,27 +25,19 @@
     <div appScrollAnimate>
       <div class="flex items-center gap-3 mb-6">
         <span class="h-px w-12" style="background: #d3af67;"></span>
-        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Про ресторан</span>
+        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'restaurants.aboutLabel' | translate }}</span>
       </div>
       <h2 class="text-4xl lg:text-5xl xl:text-6xl font-light text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">
-        Смак, що <span class="gradient-text">запам'ятовується</span>
+        {{ 'restaurants.aboutTitle' | translate }} <span class="gradient-text">{{ 'restaurants.aboutSpan' | translate }}</span>
       </h2>
       <p class="text-white/60 leading-relaxed mb-5">
-        Ресторан «За Тином» — це місце, де поєднуються традиції справжньої української
-        кухні та європейська гастрономія. Щоденні сніданки-шведський стіл, обіди та вечері
-        з меню à la carte.
+        {{ 'restaurants.aboutP1' | translate }}
       </p>
       <p class="text-white/60 leading-relaxed mb-8">
-        Великий зал до 100 гостей, затишна мала зала та літня тераса. Організація банкетів,
-        корпоративних заходів та урочистостей будь-якого масштабу.
+        {{ 'restaurants.aboutP2' | translate }}
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 mb-8">
-        @for (info of [
-          {icon: '🕐', label: 'Сніданок', time: '7:00 — 10:30'},
-          {icon: '🍽️', label: 'Обід/Вечеря', time: '12:00 — 23:00'},
-          {icon: '🥂', label: 'Банкети', time: 'За замовленням'},
-          {icon: '☕', label: 'Бар', time: '10:00 — 24:00'}
-        ]; track info.label) {
+        @for (info of hours(); track info.label) {
           <div class="glass-card p-4">
             <div class="text-xl mb-1">{{ info.icon }}</div>
             <div class="text-xs text-white/40 mb-0.5">{{ info.label }}</div>
@@ -54,9 +46,9 @@
         }
       </div>
       <div class="flex flex-wrap gap-3 items-center">
-        <a routerLink="/contacts" class="btn-gold">Забронювати столик</a>
+        <a routerLink="/contacts" class="btn-gold">{{ 'restaurants.btn1' | translate }}</a>
         <a href="tel:+380673805404" class="btn-outline-gold">
-          +38(067)380-54-04
+          {{ 'restaurants.btn2' | translate }}
         </a>
       </div>
     </div>
@@ -64,7 +56,7 @@
     <!-- Image -->
     <div class="rounded-3xl overflow-hidden h-[200px] sm:h-[280px] md:h-[400px] lg:h-[500px] xl:h-[620px]" appScrollAnimate>
       <img src="https://kleopatra-hotel.com/images/Slide/restorans/1.jpg"
-           alt="Ресторан «За Тином»"
+           alt="Restaurant"
            appParallax
            loading="lazy"
            class="w-full h-full object-cover">
@@ -78,15 +70,15 @@
     <div class="text-center mb-12" appScrollAnimate>
       <div class="flex items-center justify-center gap-3 mb-4">
         <span class="h-px w-12" style="background: #d3af67;"></span>
-        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Зали та майданчики</span>
+        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'restaurants.hallsLabel' | translate }}</span>
         <span class="h-px w-12" style="background: #d3af67;"></span>
       </div>
       <h2 class="text-4xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
-        Наші <span class="gradient-text">зали</span>
+        {{ 'restaurants.hallsTitle' | translate }} <span class="gradient-text">{{ 'restaurants.hallsSpan' | translate }}</span>
       </h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 xl:gap-8">
-      @for (hall of halls; track hall.name) {
+      @for (hall of halls(); track hall.name) {
         <div class="group rounded-2xl overflow-hidden border border-white/5 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1"
              style="background: #111;" appScrollAnimate>
           <div class="h-32 sm:h-40 lg:h-52 xl:h-60 overflow-hidden">
@@ -110,18 +102,18 @@
   <div class="max-w-2xl mx-auto text-center" appScrollAnimate>
     <div class="flex items-center justify-center gap-3 mb-6">
       <span class="h-px w-12" style="background: #d3af67;"></span>
-      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Гастрономія</span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'restaurants.ctaLabel' | translate }}</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
     <h2 class="text-4xl lg:text-5xl font-light text-white mb-4" style="font-family: 'Cormorant Garamond', serif;">
-      Готові до <span class="gradient-text">смачного вечора</span>?
+      {{ 'restaurants.ctaTitle' | translate }} <span class="gradient-text">{{ 'restaurants.ctaSpan' | translate }}</span>?
     </h2>
     <p class="text-white/50 mb-10">
-      Забронюйте стіл або ознайомтесь з повним меню ресторану «За Тином»
+      {{ 'restaurants.ctaDesc' | translate }}
     </p>
     <div class="flex flex-wrap justify-center gap-4">
-      <a routerLink="/contacts" class="btn-gold">Забронювати столик</a>
-      <a routerLink="/menu" class="btn-outline-gold">Переглянути повне меню</a>
+      <a routerLink="/contacts" class="btn-gold">{{ 'restaurants.ctaBtn1' | translate }}</a>
+      <a routerLink="/menu" class="btn-outline-gold">{{ 'restaurants.ctaBtn2' | translate }}</a>
     </div>
   </div>
 </section>

@@ -1,20 +1,20 @@
 <!-- HERO -->
-<section class="relative pt-24 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-16 sm:pt-20 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #050a08 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-15"
        style="background: radial-gradient(ellipse at 50% 0%, #531e10 0%, transparent 60%);"></div>
   <div class="relative z-10 max-w-7xl mx-auto text-center">
     <div class="flex items-center justify-center gap-3 mb-4">
       <span class="h-px w-12" style="background: #d3af67;"></span>
-      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Зв'яжіться з нами</span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'contacts.label' | translate }}</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
-      <span class="gradient-text">Контакти</span>
+      <span class="gradient-text">{{ 'contacts.title' | translate }}</span>
     </h1>
     <p class="text-white/50 max-w-xl mx-auto">
-      Ми завжди раді відповісти на ваші запитання та допомогти з бронюванням
+      {{ 'contacts.subtitle' | translate }}
     </p>
   </div>
 </section>
@@ -26,16 +26,16 @@
     <!-- FORM -->
     <div appScrollAnimate>
       <h2 class="text-3xl lg:text-4xl xl:text-5xl font-light text-white mb-8" style="font-family: 'Cormorant Garamond', serif;">
-        Написати нам
+        {{ 'contacts.formTitle' | translate }}
       </h2>
 
       @if (success) {
         <div class="glass-card p-6 border border-green-500/30 mb-6 text-center">
           <div class="text-4xl mb-3">✅</div>
-          <p class="text-white font-medium mb-1">Повідомлення надіслано!</p>
-          <p class="text-white/50 text-sm">Ми зв'яжемося з вами протягом 1 години</p>
+          <p class="text-white font-medium mb-1">{{ 'contacts.success.title' | translate }}</p>
+          <p class="text-white/50 text-sm">{{ 'contacts.success.desc' | translate }}</p>
           <button class="mt-4 text-sm" style="color: #d3af67;" (click)="success = false">
-            Надіслати ще
+            {{ 'contacts.success.again' | translate }}
           </button>
         </div>
       }
@@ -45,12 +45,12 @@
         <!-- Name -->
         <div>
           <label class="block text-xs tracking-widest uppercase text-white/40 mb-1.5">
-            Ваше ім'я *
+            {{ 'contacts.form.name.label' | translate }}
           </label>
           <input
             formControlName="name"
             type="text"
-            placeholder="Іван Іваненко"
+            [placeholder]="'contacts.form.name.placeholder' | translate"
             class="w-full px-4 py-3.5 rounded-xl text-white text-sm transition-all duration-300 focus:outline-none"
             [ngClass]="{
               'border-red-500/50': isInvalid('name'),
@@ -58,19 +58,19 @@
             }"
             style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
           @if (isInvalid('name')) {
-            <p class="text-red-400/70 text-xs mt-1">Вкажіть ваше ім'я (мінімум 2 символи)</p>
+            <p class="text-red-400/70 text-xs mt-1">{{ 'contacts.form.name.error' | translate }}</p>
           }
         </div>
 
         <!-- Email -->
         <div>
           <label class="block text-xs tracking-widest uppercase text-white/40 mb-1.5">
-            Email *
+            {{ 'contacts.form.email.label' | translate }}
           </label>
           <input
             formControlName="email"
             type="email"
-            placeholder="ivan@example.com"
+            [placeholder]="'contacts.form.email.placeholder' | translate"
             class="w-full px-4 py-3.5 rounded-xl text-white text-sm transition-all duration-300 focus:outline-none"
             [ngClass]="{
               'border-red-500/50': isInvalid('email'),
@@ -78,19 +78,19 @@
             }"
             style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
           @if (isInvalid('email')) {
-            <p class="text-red-400/70 text-xs mt-1">Введіть коректну email-адресу</p>
+            <p class="text-red-400/70 text-xs mt-1">{{ 'contacts.form.email.error' | translate }}</p>
           }
         </div>
 
         <!-- Phone -->
         <div>
           <label class="block text-xs tracking-widest uppercase text-white/40 mb-1.5">
-            Телефон
+            {{ 'contacts.form.phone.label' | translate }}
           </label>
           <input
             formControlName="phone"
             type="tel"
-            placeholder="+38 (0__) ___-__-__"
+            [placeholder]="'contacts.form.phone.placeholder' | translate"
             class="w-full px-4 py-3.5 rounded-xl text-white text-sm transition-all duration-300 focus:outline-none"
             style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
         </div>
@@ -98,28 +98,28 @@
         <!-- Subject -->
         <div>
           <label class="block text-xs tracking-widest uppercase text-white/40 mb-1.5">
-            Тема
+            {{ 'contacts.form.subject.label' | translate }}
           </label>
           <select
             formControlName="subject"
             class="w-full px-4 py-3.5 rounded-xl text-white text-sm transition-all duration-300 focus:outline-none"
             style="background: rgba(20,20,20,0.9); border: 1px solid rgba(255,255,255,0.1);">
-            <option value="booking" style="background: #111;">Бронювання номера</option>
-            <option value="restaurant" style="background: #111;">Бронювання столика</option>
-            <option value="event" style="background: #111;">Організація заходу</option>
-            <option value="other" style="background: #111;">Інше питання</option>
+            <option value="booking" style="background: #111;">{{ 'contacts.form.subject.booking' | translate }}</option>
+            <option value="restaurant" style="background: #111;">{{ 'contacts.form.subject.restaurant' | translate }}</option>
+            <option value="event" style="background: #111;">{{ 'contacts.form.subject.event' | translate }}</option>
+            <option value="other" style="background: #111;">{{ 'contacts.form.subject.other' | translate }}</option>
           </select>
         </div>
 
         <!-- Message -->
         <div>
           <label class="block text-xs tracking-widest uppercase text-white/40 mb-1.5">
-            Повідомлення *
+            {{ 'contacts.form.message.label' | translate }}
           </label>
           <textarea
             formControlName="message"
             rows="4"
-            placeholder="Ваше повідомлення..."
+            [placeholder]="'contacts.form.message.placeholder' | translate"
             class="w-full px-4 py-3.5 rounded-xl text-white text-sm transition-all duration-300 focus:outline-none resize-none"
             [ngClass]="{
               'border-red-500/50': isInvalid('message'),
@@ -128,12 +128,12 @@
             style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
           </textarea>
           @if (isInvalid('message')) {
-            <p class="text-red-400/70 text-xs mt-1">Напишіть повідомлення (мінімум 10 символів)</p>
+            <p class="text-red-400/70 text-xs mt-1">{{ 'contacts.form.message.error' | translate }}</p>
           }
         </div>
 
         <button type="submit" class="btn-gold w-full justify-center">
-          Надіслати повідомлення
+          {{ 'contacts.form.submitBtn' | translate }}
         </button>
 
       </form>
@@ -142,12 +142,12 @@
     <!-- CONTACT INFO + MAP -->
     <div class="space-y-6" appScrollAnimate>
       <h2 class="text-3xl lg:text-4xl xl:text-5xl font-light text-white mb-8" style="font-family: 'Cormorant Garamond', serif;">
-        Наші контакти
+        {{ 'contacts.infoTitle' | translate }}
       </h2>
 
       <!-- Info Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5">
-        @for (info of contactInfo; track info.title) {
+        @for (info of contactInfo(); track info.title) {
           <div class="glass-card p-5">
             <div class="mb-2" style="color: #d3af67;" [innerHTML]="info.icon"></div>
             <div class="text-xs tracking-widest uppercase text-white/40 mb-2">{{ info.title }}</div>
@@ -161,20 +161,20 @@
       <!-- Map -->
       <div class="rounded-2xl overflow-hidden border border-white/10 h-[280px] lg:h-[380px] xl:h-[460px]">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2617.8!2d26.5689!3d48.6720!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDQwJzE5LjIiTiAyNsKwMzQnMDguNCJF!5e0!3m2!1suk!2sua!4v1710000000"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2615!2d26.5703783!3d48.6769266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4733c78af75ab32b%3A0x74f66be31e2293e1!2z0JPQvtGC0LXQu9GM0L3QuNC5INC60L7QvNC/0LvQtdC60YHQmiDQmtC70LXQvtC/0LDRgtGA0LA!5e0!3m2!1suk!2sua!4v1740000000000"
           width="100%"
           height="100%"
           style="border:0; filter: invert(90%) hue-rotate(180deg) saturate(0.8);"
           allowfullscreen
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Готель Клеопатра на карті">
+          title="Hotel Kleopatra">
         </iframe>
       </div>
 
       <!-- Direct Phone CTA -->
       <div class="glass-card p-6 text-center border border-gold/10">
-        <p class="text-white/50 text-sm mb-3">Або зателефонуйте напряму</p>
+        <p class="text-white/50 text-sm mb-3">{{ 'contacts.directCall' | translate }}</p>
         <a href="tel:+380384991652" class="btn-gold inline-flex mx-auto">
           +38(03849)9-16-52
         </a>

@@ -11,6 +11,7 @@
 [![Angular](https://img.shields.io/badge/Angular-21-DD0031?logo=angular&logoColor=white)](https://angular.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![i18n](https://img.shields.io/badge/i18n-UA%20%7C%20EN%20%7C%20PL-gold)](https://kleopatra.itkamianets.com)
 [![License](https://img.shields.io/badge/License-MIT-gold)](LICENSE)
 
 **[🌐 kleopatra.itkamianets.com](https://kleopatra.itkamianets.com)**
@@ -21,7 +22,7 @@
 
 ## ✦ Про проєкт
 
-Офіційний сайт готелю **«Клеопатра»** — чотиризіркового готельного комплексу у самому серці Старого міста Кам'янця-Подільського. Сайт побудований як Single Page Application із темним luxury-дизайном, glassmorphism-ефектами та плавними анімаціями.
+Офіційний сайт готелю **«Клеопатра»** — чотиризіркового готельного комплексу у самому серці Старого міста Кам'янця-Подільського. Сайт побудований як Single Page Application із темним luxury-дизайном, glassmorphism-ефектами, плавними анімаціями та повною підтримкою трьох мов.
 
 > **Адреса:** вул. Татарська, 19, Кам'янець-Подільський, 32300
 > **Телефон:** +38(03849)9-16-52 · +38(067)380-54-04
@@ -35,7 +36,9 @@
 |----------|---------|------|
 | Головна | `/` | Hero-слайдер, секція «Про готель», bento-сервіси, форма бронювання |
 | Номери | `/numbers` | 82 номери з фільтрацією: Стандарт від 1 700 грн → VIP від 5 000 грн |
-| Ресторан | `/restaurants` | «За Тином» — зали, меню з цінами, бронювання столика |
+| Деталі номера | `/numbers/:type` | Детальна сторінка кожного типу номера |
+| Меню | `/menu` | Меню ресторану з фільтрацією по категоріях і цінами |
+| Ресторан | `/restaurants` | «За Тином» — зали, бронювання столика |
 | Дозвілля | `/leisure` | Басейн, боулінг (6 доріжок), більярд, SPA, хамам, диско-бочка |
 | Бізнес | `/biznes` | Конференц-зал 160 місць, зал презентацій, офіс-центр |
 | Туризм | `/turizm` | 7 чудес Кам'янця, карта пам'яток, екскурсійні програми |
@@ -50,6 +53,7 @@
 Frontend:   Angular 21 (standalone components, signals, control flow)
 Styling:    Tailwind CSS 4.2 (конфіг через @theme в CSS)
             SCSS (кастомні компоненти)
+i18n:       Власний TranslationService — UA / EN / PL
 Build:      Angular CLI + PostCSS (@tailwindcss/postcss)
 Deploy:     GitHub Actions → GitHub Pages
 Domain:     kleopatra.itkamianets.com (CNAME)
@@ -57,11 +61,13 @@ Domain:     kleopatra.itkamianets.com (CNAME)
 
 ### Ключові технічні рішення
 - **Standalone components** — без NgModule, tree-shakeable
-- **Angular Signals** — реактивний стан (слайдер, меню, фільтри)
+- **Angular Signals** — реактивний стан (слайдер, меню, фільтри, мова)
 - **`@if` / `@for`** — новий control flow синтаксис Angular 17+
 - **Lazy loading** — кожна сторінка окремий chunk
+- **TranslationService + TranslatePipe** — кастомна i18n без зовнішніх бібліотек (UA/EN/PL)
 - **IntersectionObserver** — scroll-анімації `.opacity-0-init → .animate-in`
 - **HostListener** — keyboard-навігація в lightbox галереї
+- **Sticky filter scroll** — розумний scroll до фільтра при зміні категорії
 
 ---
 
@@ -87,12 +93,23 @@ Domain:     kleopatra.itkamianets.com (CNAME)
 src/
 ├── app/
 │   ├── core/
-│   │   ├── header/          # Glassmorphic navbar (scroll + mobile menu)
-│   │   └── footer/          # Dark luxury footer з соц. мережами
+│   │   ├── header/          # Glassmorphic navbar (scroll + mobile menu + language switcher)
+│   │   ├── footer/          # Dark luxury footer з соц. мережами та GitHub
+│   │   └── translation/     # TranslationService (UA/EN/PL)
+│   ├── i18n/
+│   │   ├── uk.ts            # Українські переклади
+│   │   ├── en.ts            # English translations
+│   │   ├── pl.ts            # Polskie tłumaczenia
+│   │   └── translations.type.ts
+│   ├── shared/
+│   │   ├── translate.pipe.ts        # | translate pipe
+│   │   └── scroll-animate.directive.ts
 │   └── pages/
 │       ├── home/            # Hero slider + bento grid + booking form
 │       ├── numbers/         # Room cards + filter tabs
-│       ├── restaurants/     # Зали + меню + бронювання
+│       ├── room-detail/     # Детальна сторінка номера
+│       ├── menu/            # Меню ресторану + filter tabs
+│       ├── restaurants/     # Зали + бронювання
 │       ├── leisure/         # SPA сервіси + slider
 │       ├── biznes/          # Conference room specs
 │       ├── turizm/          # Attractions + tours + map
@@ -156,6 +173,6 @@ Workflow: [`.github/workflows/deploye.yml`](.github/workflows/deploye.yml)
 
 **[🌐 Відкрити сайт](https://kleopatra.itkamianets.com)** · **[📞 +38(03849)9-16-52](tel:+380384991652)** · **[📘 Facebook](https://www.facebook.com/kleopatra.hotel.kp)**
 
-<sub>© 2025 Готель Клеопатра · Кам'янець-Подільський · Розроблено з ♥ за допомогою Angular 21</sub>
+<sub>© 2026 Готель Клеопатра · Кам'янець-Подільський · Designed by <a href="https://github.com/andre20122002">Danylchuk Andriy</a></sub>
 
 </div>

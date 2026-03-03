@@ -1,20 +1,20 @@
 <!-- HERO -->
-<section class="relative pt-24 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-16 sm:pt-20 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #050808 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-15"
        style="background: radial-gradient(ellipse at 50% 0%, #0a2010 0%, transparent 60%);"></div>
   <div class="relative z-10 max-w-7xl mx-auto text-center">
     <div class="flex items-center justify-center gap-3 mb-4">
       <span class="h-px w-12" style="background: #d3af67;"></span>
-      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Кам'янець-Подільський</span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'turizm.label' | translate }}</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
-      <span class="gradient-text">Туризм</span> та екскурсії
+      <span class="gradient-text">{{ 'turizm.title' | translate }}</span> {{ 'turizm.span' | translate }}
     </h1>
     <p class="text-white/50 max-w-xl mx-auto">
-      Відкрийте для себе одне з найкрасивіших міст України разом із готелем Клеопатра
+      {{ 'turizm.subtitle' | translate }}
     </p>
   </div>
 </section>
@@ -24,11 +24,11 @@
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-12" appScrollAnimate>
       <h2 class="text-4xl lg:text-5xl xl:text-6xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
-        Головні <span class="gradient-text">пам'ятки</span>
+        {{ 'turizm.attractionsTitle' | translate }} <span class="gradient-text">{{ 'turizm.attractionsSpan' | translate }}</span>
       </h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 xl:gap-8">
-      @for (place of attractions; track place.name; let i = $index) {
+      @for (place of attractions(); track place.name; let i = $index) {
         <div class="glass-card p-4 sm:p-5 lg:p-8 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 group cursor-default"
              appScrollAnimate [style.transition-delay]="(i * 80) + 'ms'">
           <div class="flex items-start justify-between mb-4">
@@ -49,16 +49,58 @@
   </div>
 </section>
 
-<!-- MAP of 7 Wonders -->
+<!-- MAP of Wonders -->
 <section class="py-12 lg:py-16 px-4 md:px-8 lg:px-12 xl:px-16" style="background: #080808;">
-  <div class="max-w-7xl mx-auto" appScrollAnimate>
-    <div class="rounded-3xl overflow-hidden border border-white/10 h-[280px] md:h-[340px] lg:h-[440px] xl:h-[520px]">
-      <img src="https://kleopatra-hotel.com/images/stories/mapa_low.jpg"
-           alt="Карта 7 чудес Кам'янця-Подільського"
-           loading="lazy"
-           class="w-full h-full object-cover">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-8" appScrollAnimate>
+      <h2 class="text-4xl lg:text-5xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
+        {{ 'turizm.mapTitle' | translate }} <span class="gradient-text">{{ 'turizm.mapSpan' | translate }}</span>
+      </h2>
     </div>
-    <p class="text-white/30 text-xs text-center mt-3">Карта визначних пам'яток Кам'янця-Подільського</p>
+
+    <!-- Map full size -->
+    <div class="rounded-3xl overflow-hidden border border-white/10" appScrollAnimate>
+      <img src="https://kleopatra-hotel.com/images/stories/mapa_low.jpg"
+           alt="Map"
+           loading="lazy"
+           class="w-full h-auto block">
+    </div>
+
+    <!-- Legend -->
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8" appScrollAnimate>
+
+      <!-- List 1 — Old Town landmarks -->
+      <div class="glass-card p-6 md:p-8">
+        <h3 class="text-xl font-light text-white mb-5" style="font-family: 'Cormorant Garamond', serif;">
+          {{ 'turizm.legend1Title' | translate }} <span class="gradient-text">{{ 'turizm.legend1Span' | translate }}</span>
+        </h3>
+        <ol class="space-y-2">
+          @for (item of legend1Items(); track item; let n = $index) {
+            <li class="flex gap-3 text-sm text-white/60">
+              <span class="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium" style="background: rgba(211,175,103,0.15); color: #d3af67;">{{ n + 1 }}</span>
+              {{ item }}
+            </li>
+          }
+        </ol>
+      </div>
+
+      <!-- List 2 — 7 wonders -->
+      <div class="glass-card p-6 md:p-8">
+        <h3 class="text-xl font-light text-white mb-5" style="font-family: 'Cormorant Garamond', serif;">
+          {{ 'turizm.legend2Title' | translate }} <span class="gradient-text">{{ 'turizm.legend2Span' | translate }}</span>
+        </h3>
+        <ol class="space-y-4">
+          @for (item of legend2Items(); track item.name; let n = $index) {
+            <li class="flex gap-3 text-sm text-white/60">
+              <span class="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium" style="background: rgba(211,175,103,0.15); color: #d3af67;">{{ n + 1 }}</span>
+              <span><strong class="text-white/80 font-normal">{{ item.name }}</strong> — {{ item.desc }}</span>
+            </li>
+          }
+        </ol>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -67,13 +109,13 @@
   <div class="max-w-5xl mx-auto">
     <div class="text-center mb-12" appScrollAnimate>
       <h2 class="text-4xl lg:text-5xl xl:text-6xl font-light text-white" style="font-family: 'Cormorant Garamond', serif;">
-        Екскурсійні <span class="gradient-text">програми</span>
+        {{ 'turizm.toursTitle' | translate }} <span class="gradient-text">{{ 'turizm.toursSpan' | translate }}</span>
       </h2>
-      <p class="text-white/50 mt-3">Організуємо екскурсії для гостей готелю</p>
+      <p class="text-white/50 mt-3">{{ 'turizm.toursSubtitle' | translate }}</p>
     </div>
 
     <div class="space-y-4">
-      @for (tour of tours; track tour.name) {
+      @for (tour of tours(); track tour.name) {
         <div class="glass-card p-4 sm:p-5 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-gold/20 transition-all duration-300" appScrollAnimate>
           <div>
             <h3 class="text-xl font-light text-white mb-1" style="font-family: 'Cormorant Garamond', serif;">{{ tour.name }}</h3>
@@ -89,7 +131,7 @@
             <a routerLink="/contacts"
                class="px-5 py-2 rounded-full text-sm font-medium border border-gold/30 hover:bg-gold/10 transition-all duration-300"
                style="color: #d3af67;">
-              Замовити
+              {{ 'turizm.tourBtn' | translate }}
             </a>
           </div>
         </div>
@@ -97,8 +139,8 @@
     </div>
 
     <div class="text-center mt-10" appScrollAnimate>
-      <p class="text-white/40 text-sm mb-4">Індивідуальний маршрут — за вашими побажаннями</p>
-      <a routerLink="/contacts" class="btn-gold">Зв'язатися з нами</a>
+      <p class="text-white/40 text-sm mb-4">{{ 'turizm.tourIndividual' | translate }}</p>
+      <a routerLink="/contacts" class="btn-gold">{{ 'turizm.tourCta' | translate }}</a>
     </div>
   </div>
 </section>

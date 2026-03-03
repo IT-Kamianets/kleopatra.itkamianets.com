@@ -1,20 +1,20 @@
 <!-- HERO -->
-<section class="relative pt-24 md:pt-32 lg:pt-40 pb-12 md:pb-16 lg:pb-20 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-16 sm:pt-20 md:pt-32 lg:pt-40 pb-12 md:pb-16 lg:pb-20 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #08050a 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-15"
        style="background: radial-gradient(ellipse at 50% 0%, #531e10 0%, transparent 60%);"></div>
   <div class="relative z-10 max-w-7xl mx-auto text-center">
     <div class="flex items-center justify-center gap-3 mb-4">
       <span class="h-px w-12" style="background: #d3af67;"></span>
-      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Ресторан «За Тином»</span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'menu.label' | translate }}</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
-      Меню <span class="gradient-text">ресторану</span>
+      {{ 'menu.title' | translate }} <span class="gradient-text">{{ 'menu.span' | translate }}</span>
     </h1>
     <p class="text-white/50 max-w-xl mx-auto">
-      Авторська кухня — від закусок до десертів
+      {{ 'menu.subtitle' | translate }}
     </p>
   </div>
 </section>
@@ -24,7 +24,7 @@
          style="background: rgba(10,10,10,0.95); backdrop-filter: blur(20px);">
   <div class="max-w-7xl mx-auto">
     <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-      @for (group of groups; track group.id) {
+      @for (group of groups(); track group.id) {
         <button
           (click)="setGroup(group.id)"
           [ngClass]="activeGroup() === group.id
@@ -42,7 +42,7 @@
 <!-- MENU SECTIONS -->
 <section class="py-10 sm:py-14 lg:py-24 px-4 md:px-8 lg:px-12 xl:px-16" style="background: #0a0a0a;">
   <div class="max-w-5xl mx-auto space-y-14">
-    @for (section of filteredSections; track section.title) {
+    @for (section of filteredSections(); track section.title) {
       <div appScrollAnimate>
         <h2 class="text-2xl lg:text-3xl font-light mb-6 pb-4 border-b"
             style="color: #d3af67; font-family: 'Cormorant Garamond', serif; border-color: rgba(211,175,103,0.2);">
@@ -75,14 +75,14 @@
     <div class="glass-card p-5 sm:p-7 md:p-10 rounded-3xl"
          style="background: linear-gradient(135deg, rgba(83,30,16,0.15) 0%, rgba(211,175,103,0.05) 100%);">
       <h3 class="text-3xl font-light text-white mb-3" style="font-family: 'Cormorant Garamond', serif;">
-        Забронюйте стіл заздалегідь
+        {{ 'menu.cta.title' | translate }}
       </h3>
       <p class="text-white/50 mb-6 max-w-md mx-auto">
-        Для банкетів, корпоративних заходів та святкувань — зателефонуйте або заповніть форму
+        {{ 'menu.cta.desc' | translate }}
       </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a routerLink="/contacts" class="btn-gold">Забронювати столик</a>
-        <a href="tel:+380673805404" class="btn-outline-gold">+38(067)380-54-04</a>
+        <a routerLink="/contacts" class="btn-gold">{{ 'menu.cta.btn1' | translate }}</a>
+        <a href="tel:+380673805404" class="btn-outline-gold">{{ 'menu.cta.btn2' | translate }}</a>
       </div>
     </div>
   </div>

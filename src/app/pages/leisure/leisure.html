@@ -1,20 +1,20 @@
 <!-- HERO -->
-<section class="relative pt-24 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-16 sm:pt-20 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #050a08 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-15"
        style="background: radial-gradient(ellipse at 50% 0%, #0a3020 0%, transparent 60%);"></div>
   <div class="relative z-10 max-w-7xl mx-auto text-center">
     <div class="flex items-center justify-center gap-3 mb-4">
       <span class="h-px w-12" style="background: #d3af67;"></span>
-      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Відпочинок та оздоровлення</span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'leisure.label' | translate }}</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
-      <span class="gradient-text">Дозвілля</span> & Wellness
+      <span class="gradient-text">{{ 'leisure.title' | translate }}</span> {{ 'leisure.span' | translate }}
     </h1>
     <p class="text-white/50 max-w-xl mx-auto">
-      SPA, басейн, фітнес та розваги — все для вашого повного відновлення
+      {{ 'leisure.subtitle' | translate }}
     </p>
   </div>
 </section>
@@ -23,7 +23,7 @@
 <section class="py-12 md:py-20 lg:py-28 xl:py-36 px-4 md:px-8 lg:px-12 xl:px-16" style="background: #0a0a0a;">
   <div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10">
-      @for (service of services; track service.title; let i = $index) {
+      @for (service of services(); track service.title; let i = $index) {
         <div class="glass-card p-5 sm:p-6 md:p-8 lg:p-10 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 group cursor-default"
              appScrollAnimate [style.transition-delay]="(i * 80) + 'ms'">
           <div class="mb-5" style="color: #d3af67;" [innerHTML]="service.icon"></div>
@@ -44,7 +44,7 @@
     <!-- Image -->
     <div class="rounded-3xl overflow-hidden h-[200px] sm:h-[280px] md:h-[380px] lg:h-[450px] xl:h-[560px]" appScrollAnimate>
       <img src="assets/img/gallery/event-022.jpg"
-           alt="Сауна SPA-центру готелю Клеопатра"
+           alt="SPA"
            appParallax
            loading="lazy"
            class="w-full h-full object-cover">
@@ -54,24 +54,23 @@
     <div appScrollAnimate>
       <div class="flex items-center gap-3 mb-6">
         <span class="h-px w-12" style="background: #d3af67;"></span>
-        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">SPA-центр</span>
+        <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'leisure.spaLabel' | translate }}</span>
       </div>
       <h2 class="text-4xl lg:text-5xl xl:text-6xl font-light text-white mb-6" style="font-family: 'Cormorant Garamond', serif;">
-        Повне <span class="gradient-text">відновлення</span> тіла та душі
+        {{ 'leisure.spaTitle' | translate }} <span class="gradient-text">{{ 'leisure.spaSpan' | translate }}</span>{{ 'leisure.spaSuffix' | translate }}
       </h2>
       <p class="text-white/60 leading-relaxed mb-5">
-        Наш SPA-центр пропонує широкий спектр процедур для відновлення та релаксації.
-        Досвідчені фахівці підберуть програму індивідуально для кожного гостя.
+        {{ 'leisure.spaP' | translate }}
       </p>
       <ul class="space-y-3 mb-8">
-        @for (item of spaItems; track item) {
+        @for (item of spaItems(); track item) {
           <li class="flex items-center gap-3 text-white/60 text-sm">
             <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background: #d3af67;"></span>
             {{ item }}
           </li>
         }
       </ul>
-      <a routerLink="/contacts" class="btn-gold">Записатися на процедуру</a>
+      <a routerLink="/contacts" class="btn-gold">{{ 'leisure.spaBtn' | translate }}</a>
     </div>
   </div>
 </section>

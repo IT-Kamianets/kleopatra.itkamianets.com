@@ -1,29 +1,27 @@
 <!-- PAGE HERO -->
-<section class="relative pt-24 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
+<section class="relative pt-16 sm:pt-20 md:pt-32 lg:pt-40 pb-14 md:pb-20 lg:pb-28 px-4 md:px-8 overflow-hidden"
          style="background: linear-gradient(180deg, #0d0502 0%, #0a0a0a 100%);">
   <div class="absolute inset-0 opacity-20"
        style="background: radial-gradient(ellipse at 50% 0%, #531e10 0%, transparent 60%);"></div>
   <div class="relative z-10 max-w-7xl mx-auto text-center">
     <div class="flex items-center justify-center gap-3 mb-4">
       <span class="h-px w-12" style="background: #d3af67;"></span>
-      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">Готель Клеопатра</span>
+      <span class="text-xs tracking-[0.3em] uppercase" style="color: #d3af67;">{{ 'numbers.label' | translate }}</span>
       <span class="h-px w-12" style="background: #d3af67;"></span>
     </div>
     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-light text-white mb-4"
         style="font-family: 'Cormorant Garamond', serif;">
-      Наші <span class="gradient-text">Номери</span>
+      {{ 'numbers.title' | translate }} <span class="gradient-text">{{ 'numbers.span' | translate }}</span>
     </h1>
-    <p class="text-white/50 max-w-xl mx-auto">
-      82 номери: Стандарт від 1 700 грн · Люкс від 2 600 грн · Бізнес від 3 300 грн · VIP від 5 000 грн
-    </p>
+    <p class="text-white/50 max-w-xl mx-auto">{{ 'numbers.subtitle' | translate }}</p>
   </div>
 </section>
 
 <!-- FILTER TABS -->
-<section class="sticky top-16 md:top-20 lg:top-24 z-40 px-4 py-4 border-b"
+<section id="numbers-filter" class="sticky top-16 md:top-20 lg:top-24 z-40 px-4 py-4 border-b"
          style="background: rgba(10,10,10,0.95); backdrop-filter: blur(16px); border-color: rgba(255,255,255,0.05);">
   <div class="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
-    @for (cat of categories; track cat.id) {
+    @for (cat of categories(); track cat.id) {
       <button
         class="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
         [ngClass]="{
@@ -42,10 +40,11 @@
 <section class="py-16 lg:py-20 xl:py-24 px-4 md:px-8 lg:px-12 xl:px-16" style="background: #0a0a0a;">
   <div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-8 xl:gap-10">
-      @for (room of filteredRooms; track room.id; let i = $index) {
-        <div class="group relative rounded-3xl overflow-hidden border border-white/5 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1"
-             style="background: #111;"
-             appScrollAnimate [style.transition-delay]="(i * 80) + 'ms'">
+      @for (room of filteredRooms(); track room.id; let i = $index) {
+        <a [routerLink]="['/numbers', room.category]"
+           class="group relative rounded-3xl overflow-hidden border border-white/5 hover:border-gold/30 transition-all duration-500 hover:-translate-y-1 block"
+           style="background: #111;"
+           appScrollAnimate [style.transition-delay]="(i * 80) + 'ms'">
 
           <!-- Badge -->
           @if (room.badge) {
@@ -98,13 +97,12 @@
             </div>
 
             <!-- CTA -->
-            <a routerLink="/contacts"
-               class="w-full block text-center py-3 rounded-xl text-sm font-medium transition-all duration-300 border border-gold/20 hover:border-gold/60 hover:bg-gold/5"
-               style="color: #d3af67;">
-              Забронювати
-            </a>
+            <div class="w-full text-center py-3 rounded-xl text-sm font-medium border border-gold/20 group-hover:border-gold/60 group-hover:bg-gold/5 transition-all duration-300"
+                 style="color: #d3af67;">
+              {{ 'numbers.detailsBtn' | translate }}
+            </div>
           </div>
-        </div>
+        </a>
       }
     </div>
   </div>
@@ -113,14 +111,10 @@
 <!-- CALL TO ACTION -->
 <section class="py-16 px-4 md:px-8 text-center" style="background: #080808;">
   <div class="max-w-2xl mx-auto">
-    <p class="text-white/50 mb-4">Є питання? Наша рецепція працює 24/7</p>
+    <p class="text-white/50 mb-4">{{ 'numbers.cta.text' | translate }}</p>
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="tel:+380384991652" class="btn-gold">
-        Зателефонувати
-      </a>
-      <a routerLink="/contacts" class="btn-outline-gold">
-        Написати нам
-      </a>
+      <a href="tel:+380384991652" class="btn-gold">{{ 'numbers.cta.btn1' | translate }}</a>
+      <a routerLink="/contacts" class="btn-outline-gold">{{ 'numbers.cta.btn2' | translate }}</a>
     </div>
   </div>
 </section>

@@ -17,7 +17,7 @@
 
       <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
-        @for (item of navItems; track item.path) {
+        @for (item of navItems(); track item.path) {
           <a
             [routerLink]="item.path"
             routerLinkActive="active-nav"
@@ -30,14 +30,38 @@
         }
       </nav>
 
-      <!-- Phone + CTA -->
+      <!-- Phone + Lang switcher + CTA -->
       <div class="hidden md:flex items-center gap-4">
+        <!-- Language Switcher -->
+        <div class="flex items-center gap-1 text-xs">
+          <button
+            (click)="svc.setLang('uk')"
+            class="px-1.5 py-0.5 rounded font-medium transition-all duration-200"
+            [style.color]="svc.currentLang() === 'uk' ? '#d3af67' : 'rgba(255,255,255,0.4)'"
+            [style.font-weight]="svc.currentLang() === 'uk' ? '600' : '400'">
+            UA
+          </button>
+          <span style="color: rgba(255,255,255,0.2);">|</span>
+          <button
+            (click)="svc.setLang('en')"
+            class="px-1.5 py-0.5 rounded font-medium transition-all duration-200"
+            [style.color]="svc.currentLang() === 'en' ? '#d3af67' : 'rgba(255,255,255,0.4)'"
+            [style.font-weight]="svc.currentLang() === 'en' ? '600' : '400'">
+            EN
+          </button>
+          <span style="color: rgba(255,255,255,0.2);">|</span>
+          <button
+            (click)="svc.setLang('pl')"
+            class="px-1.5 py-0.5 rounded font-medium transition-all duration-200"
+            [style.color]="svc.currentLang() === 'pl' ? '#d3af67' : 'rgba(255,255,255,0.4)'"
+            [style.font-weight]="svc.currentLang() === 'pl' ? '600' : '400'">
+            PL
+          </button>
+        </div>
+
         <a href="tel:+380384991652" class="text-sm font-medium transition-colors duration-300 hover:opacity-80"
            style="color: #d3af67; font-family: 'Inter', sans-serif;">
           +380384991652
-        </a>
-        <a routerLink="/numbers" class="btn-gold text-xs px-5 py-2.5">
-          Забронювати
         </a>
       </div>
 
@@ -63,7 +87,7 @@
     [ngClass]="{'max-h-screen opacity-100': mobileMenuOpen(), 'max-h-0 opacity-0': !mobileMenuOpen()}"
     style="background: rgba(10,10,10,0.97); backdrop-filter: blur(20px);">
     <nav class="flex flex-col px-4 py-4 sm:py-6 gap-2 border-t border-white/5">
-      @for (item of navItems; track item.path) {
+      @for (item of navItems(); track item.path) {
         <a
           [routerLink]="item.path"
           routerLinkActive="active-nav-mobile"
@@ -74,11 +98,35 @@
         </a>
       }
       <div class="mt-4 pt-4 border-t border-white/10 flex flex-col gap-3">
+        <!-- Mobile language switcher -->
+        <div class="flex items-center justify-center gap-3 py-2">
+          <button
+            (click)="svc.setLang('uk')"
+            class="px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border"
+            [style.color]="svc.currentLang() === 'uk' ? '#d3af67' : 'rgba(255,255,255,0.5)'"
+            [style.border-color]="svc.currentLang() === 'uk' ? '#d3af67' : 'rgba(255,255,255,0.1)'">
+            UA
+          </button>
+          <button
+            (click)="svc.setLang('en')"
+            class="px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border"
+            [style.color]="svc.currentLang() === 'en' ? '#d3af67' : 'rgba(255,255,255,0.5)'"
+            [style.border-color]="svc.currentLang() === 'en' ? '#d3af67' : 'rgba(255,255,255,0.1)'">
+            EN
+          </button>
+          <button
+            (click)="svc.setLang('pl')"
+            class="px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border"
+            [style.color]="svc.currentLang() === 'pl' ? '#d3af67' : 'rgba(255,255,255,0.5)'"
+            [style.border-color]="svc.currentLang() === 'pl' ? '#d3af67' : 'rgba(255,255,255,0.1)'">
+            PL
+          </button>
+        </div>
         <a href="tel:+380384991652" class="text-center py-3 font-medium" style="color: #d3af67;">
           +380384991652
         </a>
         <a routerLink="/numbers" class="btn-gold text-center justify-center" (click)="closeMenu()">
-          Забронювати номер
+          {{ 'nav.bookBtn' | translate }}
         </a>
       </div>
     </nav>

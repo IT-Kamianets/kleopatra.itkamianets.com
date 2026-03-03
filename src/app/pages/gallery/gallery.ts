@@ -1,6 +1,8 @@
-import { Component, OnDestroy, signal, HostListener } from '@angular/core';
+import { Component, OnDestroy, signal, HostListener, inject, computed } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ScrollAnimateDirective } from '../../shared/scroll-animate.directive';
+import { TranslationService } from '../../core/translation/translation.service';
+import { TranslatePipe } from '../../shared/translate.pipe';
 
 interface GalleryItem {
   id: number;
@@ -11,22 +13,17 @@ interface GalleryItem {
 
 @Component({
   selector: 'app-gallery',
-  imports: [NgClass, ScrollAnimateDirective],
+  imports: [NgClass, ScrollAnimateDirective, TranslatePipe],
   templateUrl: './gallery.html',
   styleUrl: './gallery.scss'
 })
 export class Gallery implements OnDestroy {
+  svc = inject(TranslationService);
   activeCategory = signal('all');
   lightboxIndex = signal(-1);
   private touchStartX = 0;
 
-  categories = [
-    { id: 'all',        label: 'Всі' },
-    { id: 'hotel',      label: 'Готель' },
-    { id: 'rooms',      label: 'Номери' },
-    { id: 'restaurant', label: 'Ресторан' },
-    { id: 'events',     label: 'Заходи' },
-  ];
+  categories = computed(() => this.svc.translations().gallery.categories);
 
   items: GalleryItem[] = [
     // Hotel (12)
@@ -163,5 +160,4 @@ export class Gallery implements OnDestroy {
       document.body.style.overflow = '';
     }
   }
-
 }
