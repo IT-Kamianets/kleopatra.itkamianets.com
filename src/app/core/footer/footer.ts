@@ -11,6 +11,7 @@ import { TranslatePipe } from '../../shared/translate.pipe';
 })
 export class Footer {
   currentYear = new Date().getFullYear();
+  readonly googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Hotel%20Kleopatra%2C%20Tatarska%2019%2C%20Kamianets-Podilskyi';
   svc = inject(TranslationService);
   links = computed(() => this.svc.translations().footer.links);
 }

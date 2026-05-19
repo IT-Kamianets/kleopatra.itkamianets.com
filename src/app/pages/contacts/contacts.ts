@@ -31,10 +31,20 @@ export class Contacts {
     this.svg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'),
   ];
 
+  readonly googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Hotel%20Kleopatra%2C%20Tatarska%2019%2C%20Kamianets-Podilskyi';
+  private readonly contactLinks = [
+    { href: this.googleMapsUrl, external: true },
+    { href: 'tel:+380673805404', external: false },
+    { href: 'mailto:kleopatrakp19@gmail.com', external: false },
+    { href: null, external: false },
+  ];
+
   contactInfo = computed(() =>
     this.svc.translations().contacts.infoItems.map((item, i) => ({
       ...item,
       icon: this.contactIcons[i],
+      href: this.contactLinks[i].href,
+      external: this.contactLinks[i].external,
     }))
   );
 

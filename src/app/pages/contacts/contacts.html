@@ -151,8 +151,21 @@
           <div class="glass-card p-5">
             <div class="mb-2" style="color: #d3af67;" [innerHTML]="info.icon"></div>
             <div class="text-xs tracking-widest uppercase text-white/40 mb-2">{{ info.title }}</div>
-            @for (line of info.lines; track line) {
-              <p class="text-white/80 text-sm">{{ line }}</p>
+            @if (info.href) {
+              <a
+                [href]="info.href"
+                [attr.target]="info.external ? '_blank' : null"
+                [attr.rel]="info.external ? 'noopener noreferrer' : null"
+                class="block cursor-pointer text-white/80 text-sm transition-colors hover:text-gold hover:underline focus:text-gold focus:underline focus:outline-none underline-offset-4"
+                [attr.aria-label]="info.title">
+                @for (line of info.lines; track line) {
+                  <span class="block">{{ line }}</span>
+                }
+              </a>
+            } @else {
+              @for (line of info.lines; track line) {
+                <p class="text-white/80 text-sm">{{ line }}</p>
+              }
             }
           </div>
         }
