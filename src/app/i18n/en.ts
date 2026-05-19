@@ -329,7 +329,7 @@ export const EN: Translations = {
       title: 'Book a table in advance',
       desc: 'For banquets, corporate events and celebrations — call or fill in the form',
       btn1: 'Book a Table',
-      btn2: '+38(067)380-54-04',
+      btn2: '+38(067) 380-54-04',
     },
   },
 
@@ -350,7 +350,7 @@ export const EN: Translations = {
       { icon: '☕', label: 'Bar', time: '10:00 — 24:00' },
     ],
     btn1: 'Book a Table',
-    btn2: '+38(067)380-54-04',
+    btn2: '+38(067) 380-54-04',
     hallsLabel: 'Halls & Venues',
     hallsTitle: 'Our',
     hallsSpan: 'Halls',
@@ -506,7 +506,7 @@ export const EN: Translations = {
     success: { title: 'Message sent!', desc: 'We will contact you within 1 hour', again: 'Send another' },
     infoItems: [
       { title: 'Address', lines: ['19 Tatarska St.', 'Kamianets-Podilskyi, 32300'] },
-      { title: 'Phone', lines: ['+38(03849)9-16-52', '+38(067)380-54-04 (Viber)'] },
+      { title: 'Phone', lines: ['+38(067) 380-54-04'] },
       { title: 'Email', lines: ['kleopatrakp19@gmail.com'] },
       { title: 'Reception', lines: ['24/7 — around the clock'] },
     ],

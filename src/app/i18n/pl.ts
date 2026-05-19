@@ -329,7 +329,7 @@ export const PL: Translations = {
       title: 'Zarezerwuj stolik z wyprzedzeniem',
       desc: 'Na bankiety, imprezy firmowe i uroczystości — zadzwoń lub wypełnij formularz',
       btn1: 'Zarezerwuj stolik',
-      btn2: '+38(067)380-54-04',
+      btn2: '+38(067) 380-54-04',
     },
   },
 
@@ -350,7 +350,7 @@ export const PL: Translations = {
       { icon: '☕', label: 'Bar', time: '10:00 — 24:00' },
     ],
     btn1: 'Zarezerwuj stolik',
-    btn2: '+38(067)380-54-04',
+    btn2: '+38(067) 380-54-04',
     hallsLabel: 'Sale i miejsca',
     hallsTitle: 'Nasze',
     hallsSpan: 'sale',
@@ -506,7 +506,7 @@ export const PL: Translations = {
     success: { title: 'Wiadomość wysłana!', desc: 'Skontaktujemy się z Tobą w ciągu 1 godziny', again: 'Wyślij kolejną' },
     infoItems: [
       { title: 'Adres', lines: ['ul. Tatarska 19', 'Kamieniec Podolski, 32300'] },
-      { title: 'Telefon', lines: ['+38(03849)9-16-52', '+38(067)380-54-04 (Viber)'] },
+      { title: 'Telefon', lines: ['+38(067) 380-54-04'] },
       { title: 'Email', lines: ['kleopatrakp19@gmail.com'] },
       { title: 'Recepcja', lines: ['24/7 — całą dobę'] },
     ],

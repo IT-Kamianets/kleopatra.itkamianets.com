@@ -25,7 +25,7 @@
 Офіційний сайт готелю **«Клеопатра»** — чотиризіркового готельного комплексу у самому серці Старого міста Кам'янця-Подільського. Сайт побудований як Single Page Application із темним luxury-дизайном, glassmorphism-ефектами, плавними анімаціями та повною підтримкою трьох мов.
 
 > **Адреса:** вул. Татарська, 19, Кам'янець-Подільський, 32300
-> **Телефон:** +38(03849)9-16-52 · +38(067)380-54-04
+> **Телефон:** +38(067) 380-54-04
 > **Email:** kleopatrakp19@gmail.com
 
 ---
@@ -171,7 +171,7 @@ Workflow: [`.github/workflows/deploye.yml`](.github/workflows/deploye.yml)
 
 <div align="center">
 
-**[🌐 Відкрити сайт](https://kleopatra.itkamianets.com)** · **[📞 +38(03849)9-16-52](tel:+380384991652)** · **[📘 Facebook](https://www.facebook.com/kleopatra.hotel.kp)**
+**[🌐 Відкрити сайт](https://kleopatra.itkamianets.com)** · **[📞 +38(067) 380-54-04](tel:+380673805404)** · **[📘 Facebook](https://www.facebook.com/kleopatra.hotel.kp)**
 
 <sub>© 2026 Готель Клеопатра · Кам'янець-Подільський · Designed by <a href="https://github.com/andre20122002">Danylchuk Andriy</a></sub>
 
